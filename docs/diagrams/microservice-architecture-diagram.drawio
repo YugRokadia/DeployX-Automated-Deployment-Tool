@@ -1,0 +1,374 @@
+<mxfile host="app.diagrams.net" agent="DeployX">
+  <diagram id="microservice-arch" name="Microservice Architecture">
+    <mxGraphModel dx="3654" dy="1185" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1400" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=20;fontStyle=1;fontColor=#1E293B;" value="DeployX — Microservice Architecture Diagram" vertex="1">
+          <mxGeometry height="40" width="500" x="400" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" parent="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=11;fontColor=#64748B;fontStyle=2;" value="Subject: Microservice and Architecture&lt;br&gt;Distributed CI/CD Platform with Self-Healing Deployments" vertex="1">
+          <mxGeometry height="40" width="480" x="410" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="github" parent="1" style="shape=mxgraph.basic.cloud_callout;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#666666;fontStyle=1;fontSize=13;fontColor=#374151;" value="GitHub" vertex="1">
+          <mxGeometry height="80" width="160" x="100" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="browser" parent="1" style="shape=mxgraph.basic.cloud_callout;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#666666;fontStyle=1;fontSize=13;fontColor=#374151;" value="Developer&lt;br&gt;Browser" vertex="1">
+          <mxGeometry height="80" width="160" x="560" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="cron" parent="1" style="shape=mxgraph.basic.cloud_callout;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#666666;fontStyle=1;fontSize=13;fontColor=#374151;" value="External&lt;br&gt;Cron Service" vertex="1">
+          <mxGeometry height="80" width="160" x="1020" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="vercel-container" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;strokeWidth=2;dashed=0;opacity=40;arcSize=8;" value="" vertex="1">
+          <mxGeometry height="260" width="1200" x="40" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="vercel-label" parent="1" style="text;html=1;align=left;verticalAlign=top;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=14;fontStyle=1;fontColor=#2563EB;" value="Vercel Platform — Control Plane (Bounded Context)" vertex="1">
+          <mxGeometry height="30" width="420" x="55" y="245" as="geometry" />
+        </mxCell>
+        <mxCell id="webhook-svc" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;strokeWidth=2;fontSize=11;fontColor=#1E40AF;arcSize=12;" value="&lt;b&gt;Webhook Ingestion&lt;br&gt;Service&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;/api/webhooks/github/[id]&lt;br&gt;HMAC-SHA256 verification&lt;br&gt;Pipeline run creation&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="200" x="60" y="285" as="geometry" />
+        </mxCell>
+        <mxCell id="api-gateway" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;strokeWidth=2;fontSize=11;fontColor=#1E40AF;arcSize=12;" value="&lt;b&gt;API Gateway&lt;br&gt;Service&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;All /api/* routes&lt;br&gt;Auth middleware + RBAC&lt;br&gt;Request routing&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="200" x="290" y="285" as="geometry" />
+        </mxCell>
+        <mxCell id="web-dashboard" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;strokeWidth=2;fontSize=11;fontColor=#1E40AF;arcSize=12;" value="&lt;b&gt;Web Dashboard&lt;br&gt;Service&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;Next.js 16 SSR + React&lt;br&gt;Real-time status updates&lt;br&gt;Project / Pipeline / Deploy UI&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="210" x="520" y="285" as="geometry" />
+        </mxCell>
+        <mxCell id="runner-coord" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;strokeWidth=2;fontSize=11;fontColor=#1E40AF;arcSize=12;" value="&lt;b&gt;Runner Coordination&lt;br&gt;Service&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;/api/runner/* (12 endpoints)&lt;br&gt;Job queue, claim, status, logs&lt;br&gt;Heartbeat, deployment CRUD&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="220" x="290" y="395" as="geometry" />
+        </mxCell>
+        <mxCell id="notification-svc" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;strokeWidth=2;fontSize=11;fontColor=#1E40AF;arcSize=12;" value="&lt;b&gt;Notification&lt;br&gt;Service&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;/api/notifications&lt;br&gt;Alerts, deployment status&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="180" x="760" y="285" as="geometry" />
+        </mxCell>
+        <mxCell id="cron-handler" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;strokeWidth=1;fontSize=10;fontColor=#1E40AF;arcSize=12;dashed=1;" value="&lt;b&gt;Cron Handler&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;/api/cron/schedules&lt;/font&gt;" vertex="1">
+          <mxGeometry height="50" width="140" x="980" y="285" as="geometry" />
+        </mxCell>
+        <mxCell id="supabase-container" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D1FAE5;strokeColor=#059669;strokeWidth=2;dashed=0;opacity=40;arcSize=8;" value="" vertex="1">
+          <mxGeometry height="160" width="1200" x="40" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="supabase-label" parent="1" style="text;html=1;align=left;verticalAlign=top;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=14;fontStyle=1;fontColor=#059669;" value="Supabase Platform — Data Platform (Bounded Context)" vertex="1">
+          <mxGeometry height="30" width="420" x="55" y="565" as="geometry" />
+        </mxCell>
+        <mxCell id="auth-svc" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D1FAE5;strokeColor=#059669;strokeWidth=2;fontSize=11;fontColor=#065F46;arcSize=12;" value="&lt;b&gt;Auth Service&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;GitHub OAuth (PKCE)&lt;br&gt;Session management&lt;br&gt;JWT token issuance&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="180" x="60" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="database-svc" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=8;fillColor=#D1FAE5;strokeColor=#059669;strokeWidth=2;fontSize=11;fontColor=#065F46;" value="&lt;b&gt;Database Service&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;PostgreSQL — 29 tables&lt;br&gt;84 RLS policies, 57 indexes&lt;br&gt;17 enums, 7 functions&lt;/font&gt;" vertex="1">
+          <mxGeometry height="100" width="220" x="290" y="597" as="geometry" />
+        </mxCell>
+        <mxCell id="realtime-svc" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D1FAE5;strokeColor=#059669;strokeWidth=2;fontSize=11;fontColor=#065F46;arcSize=12;" value="&lt;b&gt;Realtime Service&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;WebSocket (WSS)&lt;br&gt;Change Data Capture&lt;br&gt;Live status broadcasts&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="190" x="560" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="storage-svc" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D1FAE5;strokeColor=#059669;strokeWidth=2;fontSize=11;fontColor=#065F46;arcSize=12;" value="&lt;b&gt;Storage Service&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;S3-compatible API&lt;br&gt;Build artifacts&lt;br&gt;Log archives&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="170" x="800" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="runner-container" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;strokeWidth=2;dashed=0;opacity=40;arcSize=8;" value="" vertex="1">
+          <mxGeometry height="250" width="1200" x="40" y="790" as="geometry" />
+        </mxCell>
+        <mxCell id="runner-label" parent="1" style="text;html=1;align=left;verticalAlign=top;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=14;fontStyle=1;fontColor=#D97706;" value="Runner Infrastructure — Execution (Bounded Context) — Self-Hosted" vertex="1">
+          <mxGeometry height="30" width="480" x="55" y="795" as="geometry" />
+        </mxCell>
+        <mxCell id="job-poller" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;strokeWidth=2;fontSize=11;fontColor=#92400E;arcSize=12;" value="&lt;b&gt;Job Poller&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;Poll interval: 5s&lt;br&gt;Atomic job claim&lt;/font&gt;" vertex="1">
+          <mxGeometry height="70" width="160" x="60" y="835" as="geometry" />
+        </mxCell>
+        <mxCell id="pipeline-exec" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;strokeWidth=2;fontSize=11;fontColor=#92400E;arcSize=12;" value="&lt;b&gt;Pipeline Executor&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;DAG resolution (Kahn&#39;s algo)&lt;br&gt;Parallel task groups&lt;br&gt;Step execution (execa)&lt;/font&gt;" vertex="1">
+          <mxGeometry height="70" width="200" x="250" y="835" as="geometry" />
+        </mxCell>
+        <mxCell id="deployer-factory" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;strokeWidth=2;fontSize=11;fontColor=#92400E;arcSize=12;" value="&lt;b&gt;Deployer Factory&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;Strategy Pattern&lt;br&gt;Blue-Green | Canary | Rolling&lt;/font&gt;" vertex="1">
+          <mxGeometry height="70" width="200" x="480" y="835" as="geometry" />
+        </mxCell>
+        <mxCell id="container-orch" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;strokeWidth=2;fontSize=11;fontColor=#92400E;arcSize=12;" value="&lt;b&gt;Container Orchestrator&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;Docker API, port allocation&lt;br&gt;Nginx proxy, deployx-net&lt;/font&gt;" vertex="1">
+          <mxGeometry height="70" width="200" x="60" y="930" as="geometry" />
+        </mxCell>
+        <mxCell id="health-monitor" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;strokeWidth=2;fontSize=11;fontColor=#92400E;arcSize=12;" value="&lt;b&gt;Health Monitor&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;15s health probes&lt;br&gt;Sliding window (10 samples)&lt;br&gt;80%/50% thresholds&lt;/font&gt;" vertex="1">
+          <mxGeometry height="70" width="200" x="290" y="930" as="geometry" />
+        </mxCell>
+        <mxCell id="remediation" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;strokeWidth=2;fontSize=11;fontColor=#92400E;arcSize=12;" value="&lt;b&gt;Remediation Engine&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;3 restart attempts&lt;br&gt;Exponential backoff&lt;br&gt;Auto-rollback on failure&lt;/font&gt;" vertex="1">
+          <mxGeometry height="70" width="200" x="520" y="930" as="geometry" />
+        </mxCell>
+        <mxCell id="heartbeat" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;strokeWidth=1;fontSize=10;fontColor=#92400E;arcSize=12;dashed=1;" value="&lt;b&gt;Heartbeat&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;10s liveness ping&lt;/font&gt;" vertex="1">
+          <mxGeometry height="50" width="130" x="710" y="835" as="geometry" />
+        </mxCell>
+        <mxCell id="log-streamer" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;strokeWidth=1;fontSize=10;fontColor=#92400E;arcSize=12;dashed=1;" value="&lt;b&gt;Log Streamer&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;50-line batches / 500ms&lt;/font&gt;" vertex="1">
+          <mxGeometry height="50" width="150" x="870" y="835" as="geometry" />
+        </mxCell>
+        <mxCell id="docker-daemon" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#DC2626;strokeWidth=2;fontSize=11;fontColor=#991B1B;arcSize=12;" value="&lt;b&gt;Docker Daemon&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;Local containers&lt;br&gt;Ports 10000-10999&lt;br&gt;Unix socket API&lt;/font&gt;" vertex="1">
+          <mxGeometry height="80" width="180" x="70" y="1100" as="geometry" />
+        </mxCell>
+        <mxCell id="railway" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#DC2626;strokeWidth=2;fontSize=11;fontColor=#991B1B;arcSize=12;" value="&lt;b&gt;Railway&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;Cloud deployment&lt;br&gt;GraphQL API&lt;/font&gt;" vertex="1">
+          <mxGeometry height="80" width="160" x="500" y="1100" as="geometry" />
+        </mxCell>
+        <mxCell id="flyio" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#DC2626;strokeWidth=2;fontSize=11;fontColor=#991B1B;arcSize=12;" value="&lt;b&gt;Fly.io&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;Edge deployment&lt;br&gt;GraphQL API&lt;/font&gt;" vertex="1">
+          <mxGeometry height="80" width="160" x="720" y="1100" as="geometry" />
+        </mxCell>
+        <mxCell id="shared-container" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDE9FE;strokeColor=#7C3AED;strokeWidth=2;dashed=1;opacity=50;arcSize=8;" value="" vertex="1">
+          <mxGeometry height="400" width="260" x="1290" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="shared-label" parent="1" style="text;html=1;align=center;verticalAlign=top;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=13;fontStyle=1;fontColor=#7C3AED;" value="Shared Libraries&lt;br&gt;(Cross-Cutting Concerns)" vertex="1">
+          <mxGeometry height="40" width="220" x="1310" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="pkg-shared" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDE9FE;strokeColor=#7C3AED;strokeWidth=2;fontSize=11;fontColor=#5B21B6;arcSize=12;" value="&lt;b&gt;@deployx/shared&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;Zod Validators&lt;br&gt;TypeScript Types&lt;br&gt;AES-256-GCM Crypto&lt;br&gt;Constants &amp;amp; Enums&lt;/font&gt;" vertex="1">
+          <mxGeometry height="100" width="220" x="1310" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="pkg-engine" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDE9FE;strokeColor=#7C3AED;strokeWidth=2;fontSize=11;fontColor=#5B21B6;arcSize=12;" value="&lt;b&gt;@deployx/pipeline-engine&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;YAML Parser&lt;br&gt;DAG Resolver (Kahn&#39;s algo)&lt;br&gt;State Machine&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="220" x="1310" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="pkg-ui" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDE9FE;strokeColor=#7C3AED;strokeWidth=1;fontSize=10;fontColor=#5B21B6;arcSize=12;dashed=1;" value="&lt;b&gt;@deployx/ui&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;Shared React components&lt;/font&gt;" vertex="1">
+          <mxGeometry height="50" width="220" x="1310" y="530" as="geometry" />
+        </mxCell>
+        <mxCell id="shared-to-vercel" edge="1" parent="1" source="shared-container" style="endArrow=open;dashed=1;html=1;strokeColor=#7C3AED;fontColor=#7C3AED;fontSize=9;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="api-gateway" value="imports">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1420" y="200" />
+              <mxPoint x="390" y="200" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="shared-to-runner" edge="1" parent="1" source="shared-container" style="endArrow=open;dashed=1;html=1;strokeColor=#7C3AED;fontColor=#7C3AED;fontSize=9;exitX=0;exitY=0.85;exitDx=0;exitDy=0;entryX=1;entryY=0.3;entryDx=0;entryDy=0;" target="runner-container" value="imports">
+          <mxGeometry relative="1" x="0.4925" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="1270" y="580" />
+              <mxPoint x="1270" y="865" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arr-github-webhook" edge="1" parent="1" source="github" style="endArrow=block;html=1;strokeColor=#374151;strokeWidth=2;fontColor=#374151;fontSize=9;fontStyle=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.298;entryY=1.2;entryDx=0;entryDy=0;endFill=1;entryPerimeter=0;" target="vercel-label" value="HTTPS POST&lt;br&gt;HMAC-SHA256 signed">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr-browser-dashboard" edge="1" parent="1" source="browser" style="endArrow=block;html=1;strokeColor=#374151;strokeWidth=2;fontColor=#374151;fontSize=9;fontStyle=0;endFill=1;" value="HTTPS&lt;br&gt;SSR + Hydration">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="640" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arr-browser-api" edge="1" parent="1" source="browser" style="endArrow=block;html=1;strokeColor=#374151;strokeWidth=1;fontColor=#374151;fontSize=9;fontStyle=0;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;endFill=1;dashed=1;" target="api-gateway" value="REST API">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="440" y="180" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arr-cron-handler" edge="1" parent="1" source="cron" style="endArrow=block;html=1;strokeColor=#374151;strokeWidth=2;fontColor=#374151;fontSize=9;fontStyle=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.864;entryY=-0.04;entryDx=0;entryDy=0;endFill=1;entryPerimeter=0;" target="cron-handler" value="HTTPS GET&lt;br&gt;Bearer CRON_SECRET">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr-api-auth" edge="1" parent="1" source="api-gateway" style="endArrow=block;html=1;strokeColor=#059669;strokeWidth=1.5;fontColor=#059669;fontSize=9;fontStyle=0;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endFill=1;" target="auth-svc" value="JWT validation&lt;br&gt;(Supabase SDK)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="340" y="230" />
+              <mxPoint x="20" y="230" />
+              <mxPoint x="20" y="530" />
+              <mxPoint x="150" y="530" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arr-api-db" edge="1" parent="1" source="api-gateway" style="endArrow=block;html=1;strokeColor=#059669;strokeWidth=2;fontColor=#059669;fontSize=9;fontStyle=0;exitX=0.355;exitY=-0.033;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endFill=1;exitPerimeter=0;" target="database-svc" value="SQL queries&lt;br&gt;RLS enforced">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="360" y="200" />
+              <mxPoint x="-20" y="200" />
+              <mxPoint x="-20" y="540" />
+              <mxPoint x="400" y="540" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arr-webhook-db" edge="1" parent="1" source="webhook-svc" style="endArrow=block;html=1;strokeColor=#059669;strokeWidth=1.5;fontColor=#059669;fontSize=9;fontStyle=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.264;entryY=0.02;entryDx=0;entryDy=0;endFill=1;entryPerimeter=0;" target="database-svc" value="INSERT pipeline_runs&lt;br&gt;(status: queued)">
+          <mxGeometry relative="1" x="-0.5874" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="160" y="530" />
+              <mxPoint x="348" y="530" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arr-coord-db" edge="1" parent="1" source="runner-coord" style="endArrow=block;html=1;strokeColor=#059669;strokeWidth=2;fontColor=#059669;fontSize=9;fontStyle=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endFill=1;" target="database-svc" value="Claim jobs, update status&lt;br&gt;insert logs, deployments">
+          <mxGeometry relative="1" x="-0.5536" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="400" y="530" />
+              <mxPoint x="400" y="560" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arr-dashboard-realtime" edge="1" parent="1" source="web-dashboard" style="endArrow=block;html=1;strokeColor=#059669;strokeWidth=1.5;fontColor=#059669;fontSize=9;fontStyle=0;exitX=0.633;exitY=0.989;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endFill=1;exitPerimeter=0;" target="realtime-svc" value="WebSocket (WSS)&lt;br&gt;Subscribe pipeline_runs">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr-db-realtime" edge="1" parent="1" source="database-svc" style="endArrow=block;html=1;strokeColor=#059669;strokeWidth=1.5;fontColor=#059669;fontSize=9;fontStyle=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endFill=1;" target="realtime-svc" value="Change Data&lt;br&gt;Capture">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr-notif-db" edge="1" parent="1" source="notification-svc" style="endArrow=block;html=1;strokeColor=#059669;strokeWidth=1;fontColor=#059669;fontSize=9;fontStyle=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.85;entryY=0;entryDx=0;entryDy=0;endFill=1;dashed=1;" target="database-svc" value="Query alerts">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="850" y="540" />
+              <mxPoint x="477" y="540" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arr-poller-coord" edge="1" parent="1" source="job-poller" style="endArrow=block;html=1;strokeColor=#D97706;strokeWidth=2;fontColor=#D97706;fontSize=9;fontStyle=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.15;entryY=1;entryDx=0;entryDy=0;endFill=1;" target="runner-coord" value="HTTP GET /api/runner/jobs&lt;br&gt;Poll every 5s (Pull-based)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="140" y="770" />
+              <mxPoint x="-30" y="770" />
+              <mxPoint x="-30" y="510" />
+              <mxPoint x="323" y="510" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arr-logs-coord" edge="1" parent="1" source="log-streamer" style="endArrow=block;html=1;strokeColor=#D97706;strokeWidth=1.5;fontColor=#D97706;fontSize=9;fontStyle=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.85;entryY=1;entryDx=0;entryDy=0;endFill=1;" target="runner-coord" value="HTTP POST&lt;br&gt;Log batches, status">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="945" y="760" />
+              <mxPoint x="1260" y="760" />
+              <mxPoint x="1260" y="520" />
+              <mxPoint x="477" y="520" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arr-heartbeat-coord" edge="1" parent="1" source="heartbeat" style="endArrow=block;html=1;strokeColor=#D97706;strokeWidth=1;fontColor=#D97706;fontSize=9;fontStyle=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.773;entryY=0.922;entryDx=0;entryDy=0;endFill=1;dashed=1;entryPerimeter=0;" target="runner-coord" value="HTTP POST /heartbeat&lt;br&gt;Every 10s">
+          <mxGeometry relative="1" x="0.196" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="775" y="740" />
+              <mxPoint x="1250" y="740" />
+              <mxPoint x="1250" y="550" />
+              <mxPoint x="460" y="550" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arr-health-coord" edge="1" parent="1" source="health-monitor" style="endArrow=block;html=1;strokeColor=#D97706;strokeWidth=1;fontColor=#D97706;fontSize=9;fontStyle=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endFill=1;dashed=1;" target="runner-coord" value="HTTP POST&lt;br&gt;Health + healing events">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="390" y="910" />
+              <mxPoint x="240" y="910" />
+              <mxPoint x="240" y="750" />
+              <mxPoint x="270" y="750" />
+              <mxPoint x="270" y="440" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arr-runner-storage" edge="1" parent="1" source="log-streamer" style="endArrow=block;html=1;strokeColor=#059669;strokeWidth=1;fontColor=#059669;fontSize=9;fontStyle=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;endFill=1;dashed=1;" target="storage-svc" value="HTTPS&lt;br&gt;Upload artifacts">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1100" y="860" />
+              <mxPoint x="1100" y="740" />
+              <mxPoint x="885" y="740" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arr-orch-docker" edge="1" parent="1" source="container-orch" style="endArrow=block;html=1;strokeColor=#DC2626;strokeWidth=2;fontColor=#DC2626;fontSize=9;fontStyle=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endFill=1;" target="docker-daemon" value="Unix Socket&lt;br&gt;Docker API (build, run, stop)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr-deployer-railway" edge="1" parent="1" source="deployer-factory" style="endArrow=block;html=1;strokeColor=#DC2626;strokeWidth=1.5;fontColor=#DC2626;fontSize=9;fontStyle=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endFill=1;" target="railway" value="HTTPS&lt;br&gt;GraphQL API">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="750" y="905" />
+              <mxPoint x="750" y="1060" />
+              <mxPoint x="580" y="1060" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arr-deployer-flyio" edge="1" parent="1" source="deployer-factory" style="endArrow=block;html=1;strokeColor=#DC2626;strokeWidth=1.5;fontColor=#DC2626;fontSize=9;fontStyle=0;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endFill=1;" target="flyio" value="HTTPS&lt;br&gt;GraphQL API">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="800" y="905" />
+              <mxPoint x="800" y="1060" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arr-poller-exec" edge="1" parent="1" source="job-poller" style="endArrow=block;html=1;strokeColor=#92400E;strokeWidth=1;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="pipeline-exec" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr-exec-deployer" edge="1" parent="1" source="pipeline-exec" style="endArrow=block;html=1;strokeColor=#92400E;strokeWidth=1;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="deployer-factory" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr-deployer-orch" edge="1" parent="1" source="deployer-factory" style="endArrow=block;html=1;strokeColor=#92400E;strokeWidth=1;endFill=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="container-orch" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="530" y="920" />
+              <mxPoint x="160" y="920" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arr-orch-health" edge="1" parent="1" source="container-orch" style="endArrow=block;html=1;strokeColor=#92400E;strokeWidth=1;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="health-monitor" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr-health-remediation" edge="1" parent="1" source="health-monitor" style="endArrow=block;html=1;strokeColor=#92400E;strokeWidth=1;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="remediation" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ann-api-gateway" parent="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=10;fontColor=#6B7280;fontStyle=2;" value="&lt;i&gt;API Gateway Pattern&lt;/i&gt;" vertex="1">
+          <mxGeometry height="20" width="120" x="270" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="ann-pull-based" parent="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=10;fontColor=#6B7280;fontStyle=2;" value="&lt;i&gt;Pull-Based Service Discovery&lt;/i&gt;" vertex="1">
+          <mxGeometry height="20" width="180" y="750" as="geometry" />
+        </mxCell>
+        <mxCell id="ann-event-driven" parent="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=10;fontColor=#6B7280;fontStyle=2;" value="&lt;i&gt;Event-Driven Ingestion&lt;/i&gt;" vertex="1">
+          <mxGeometry height="20" width="140" x="-140" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="ann-cdc" parent="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=10;fontColor=#6B7280;fontStyle=2;" value="&lt;i&gt;Change Data Capture&lt;/i&gt;" vertex="1">
+          <mxGeometry height="20" width="140" x="475" y="695" as="geometry" />
+        </mxCell>
+        <mxCell id="ann-circuit-breaker" parent="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=10;fontColor=#6B7280;fontStyle=2;" value="&lt;i&gt;Circuit Breaker + Self-Healing&lt;/i&gt;" vertex="1">
+          <mxGeometry height="20" width="190" x="290" y="1005" as="geometry" />
+        </mxCell>
+        <mxCell id="ann-strategy" parent="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=10;fontColor=#6B7280;fontStyle=2;" value="&lt;i&gt;Strategy Pattern (Deployers)&lt;/i&gt;" vertex="1">
+          <mxGeometry height="20" width="180" x="490" y="910" as="geometry" />
+        </mxCell>
+        <mxCell id="ann-bounded-ctrl" parent="1" style="text;html=1;align=right;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=10;fontColor=#2563EB;fontStyle=2;" value="&lt;i&gt;Bounded Context: Control Plane&lt;/i&gt;" vertex="1">
+          <mxGeometry height="20" width="200" x="1020" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="ann-bounded-data" parent="1" style="text;html=1;align=right;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=10;fontColor=#059669;fontStyle=2;" value="&lt;i&gt;Bounded Context: Data Platform&lt;/i&gt;" vertex="1">
+          <mxGeometry height="20" width="200" x="1020" y="700" as="geometry" />
+        </mxCell>
+        <mxCell id="ann-bounded-exec" parent="1" style="text;html=1;align=right;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=10;fontColor=#D97706;fontStyle=2;" value="&lt;i&gt;Bounded Context: Execution&lt;/i&gt;" vertex="1">
+          <mxGeometry height="20" width="200" x="1020" y="1020" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-container" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#374151;strokeWidth=1;arcSize=8;" value="" vertex="1">
+          <mxGeometry height="200" width="260" x="1290" y="690" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-title" parent="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;fontColor=#374151;" value="&lt;b&gt;Legend&lt;/b&gt;" vertex="1">
+          <mxGeometry height="25" width="60" x="1380" y="695" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-gray" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#666666;strokeWidth=1;" value="" vertex="1">
+          <mxGeometry height="15" width="20" x="1305" y="725" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-gray-text" parent="1" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=10;fontColor=#374151;" value="External Actors" vertex="1">
+          <mxGeometry height="20" width="100" x="1330" y="723" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-blue" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;strokeWidth=1;" value="" vertex="1">
+          <mxGeometry height="15" width="20" x="1305" y="750" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-blue-text" parent="1" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=10;fontColor=#374151;" value="Vercel Services (Control Plane)" vertex="1">
+          <mxGeometry height="20" width="190" x="1330" y="748" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-green" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D1FAE5;strokeColor=#059669;strokeWidth=1;" value="" vertex="1">
+          <mxGeometry height="15" width="20" x="1305" y="775" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-green-text" parent="1" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=10;fontColor=#374151;" value="Supabase Services (Data Platform)" vertex="1">
+          <mxGeometry height="20" width="210" x="1330" y="773" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-amber" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;strokeWidth=1;" value="" vertex="1">
+          <mxGeometry height="15" width="20" x="1305" y="800" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-amber-text" parent="1" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=10;fontColor=#374151;" value="Runner Components (Execution)" vertex="1">
+          <mxGeometry height="20" width="200" x="1330" y="798" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-red" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#DC2626;strokeWidth=1;" value="" vertex="1">
+          <mxGeometry height="15" width="20" x="1305" y="825" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-red-text" parent="1" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=10;fontColor=#374151;" value="Execution Targets" vertex="1">
+          <mxGeometry height="20" width="110" x="1330" y="823" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-purple" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDE9FE;strokeColor=#7C3AED;strokeWidth=1;" value="" vertex="1">
+          <mxGeometry height="15" width="20" x="1305" y="850" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-purple-text" parent="1" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=10;fontColor=#374151;" value="Shared Libraries (Cross-Cutting)" vertex="1">
+          <mxGeometry height="20" width="200" x="1330" y="848" as="geometry" />
+        </mxCell>
+        <mxCell id="metrics-box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#94A3B8;strokeWidth=1;fontSize=10;fontColor=#475569;arcSize=8;" value="&lt;b&gt;System Metrics&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;10 microservices · 29 DB tables · 84 RLS policies&lt;br&gt;12 runner API endpoints · 3 deployment strategies&lt;br&gt;17 enums · 57 indexes · AES-256-GCM encryption&lt;/font&gt;" vertex="1">
+          <mxGeometry height="80" width="260" x="1290" y="905" as="geometry" />
+        </mxCell>
+        <mxCell id="UjxtN2Haeudkv69RpFUd-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#374151;strokeWidth=1;arcSize=8;" value="&lt;div&gt;&lt;b&gt;Made by:&lt;/b&gt;&lt;/div&gt;B100 Yug Rokadia&lt;div&gt;B124 Eshan Shukla&lt;/div&gt;&lt;div&gt;B127 Kushagra Sinha&lt;/div&gt;&lt;div&gt;B145 Jash Khatri&lt;/div&gt;" vertex="1">
+          <mxGeometry height="170" width="220" x="1300" y="10" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

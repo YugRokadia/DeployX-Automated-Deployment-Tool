@@ -1,0 +1,26 @@
+{
+  "name": "deployx",
+  "private": true,
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "lint": "turbo lint",
+    "test": "turbo test",
+    "clean": "turbo clean",
+    "runner": "node apps/runner/dist/cli.js",
+    "runner:register": "node apps/runner/dist/cli.js register",
+    "runner:start": "node apps/runner/dist/cli.js start",
+    "runner:status": "node apps/runner/dist/cli.js status"
+  },
+  "devDependencies": {
+    "turbo": "^2.5.0",
+    "typescript": "^5.8.0"
+  },
+  "packageManager": "pnpm@10.33.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": ["esbuild", "sharp", "unrs-resolver"]
+  }
+}

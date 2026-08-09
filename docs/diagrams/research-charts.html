@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DeployX — Research Paper Charts &amp; Diagrams</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: #fff; color: #1a1a2e; line-height: 1.5; padding: 40px; max-width: 1200px; margin: 0 auto; }
+  h1 { font-size: 28px; margin-bottom: 8px; color: #1a1a2e; }
+  h1 small { font-size: 14px; color: #666; font-weight: 400; }
+  h2 { font-size: 20px; margin: 48px 0 16px; color: #1a1a2e; border-bottom: 2px solid #e5e7eb; padding-bottom: 8px; }
+  h2 span.num { color: #6366f1; margin-right: 8px; }
+  h3 { font-size: 15px; margin: 24px 0 8px; color: #374151; }
+  p.caption { font-size: 13px; color: #6b7280; margin: 8px 0 20px; font-style: italic; }
+  .chart-container { margin: 20px 0 40px; padding: 24px; border: 1px solid #e5e7eb; border-radius: 12px; background: #fafafa; }
+  svg text { font-family: 'Segoe UI', system-ui, sans-serif; }
+  table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 13px; }
+  th { background: #1a1a2e; color: #fff; padding: 10px 14px; text-align: left; font-weight: 600; }
+  td { padding: 8px 14px; border-bottom: 1px solid #e5e7eb; }
+  tr:nth-child(even) { background: #f9fafb; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+  .badge-green { background: #d1fae5; color: #065f46; }
+  .badge-yellow { background: #fef3c7; color: #92400e; }
+  .badge-red { background: #fee2e2; color: #991b1b; }
+  .badge-blue { background: #dbeafe; color: #1e40af; }
+  .badge-purple { background: #ede9fe; color: #5b21b6; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  @media (max-width: 800px) { .grid-2 { grid-template-columns: 1fr; } }
+  .metric-card { padding: 16px; border-radius: 8px; text-align: center; }
+  .metric-card .value { font-size: 32px; font-weight: 700; }
+  .metric-card .label { font-size: 12px; color: #6b7280; margin-top: 4px; }
+  @media print { body { padding: 20px; } .chart-container { break-inside: avoid; } }
+</style>
+</head>
+<body>
+
+<h1>DeployX — Research Paper Charts &amp; Diagrams <small>Cloud-Native CI/CD Platform</small></h1>
+<p style="color:#6b7280; margin-bottom: 32px;">Figures for: <em>"DeployX: A Self-Healing, Multi-Strategy CI/CD Platform with DAG-Based Pipeline Orchestration"</em></p>
+
+<!-- ============================================================ -->
+<h2><span class="num">Fig. 1</span> Deployment Strategy Comparison Matrix</h2>
+<p class="caption">Comparative analysis of the three deployment strategies implemented in DeployX.</p>
+
+<div class="chart-container">
+<table>
+  <thead>
+    <tr>
+      <th>Dimension</th>
+      <th>Blue-Green</th>
+      <th>Canary</th>
+      <th>Rolling</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Mechanism</strong></td>
+      <td>Two identical environments; instant traffic switch via nginx</td>
+      <td>Progressive traffic shifting through stages (10% &rarr; 25% &rarr; 50% &rarr; 100%)</td>
+      <td>Ordinal instance replacement respecting max_unavailable constraint</td>
+    </tr>
+    <tr>
+      <td><strong>Downtime</strong></td>
+      <td><span class="badge badge-green">Zero</span> (old stays live until cutover)</td>
+      <td><span class="badge badge-green">Zero</span> (stable serves traffic throughout)</td>
+      <td><span class="badge badge-yellow">Near-zero</span> (brief gap per instance)</td>
+    </tr>
+    <tr>
+      <td><strong>Rollback Speed</strong></td>
+      <td><span class="badge badge-green">Instant</span> (switch nginx back)</td>
+      <td><span class="badge badge-green">Fast</span> (remove canary, restore weights)</td>
+      <td><span class="badge badge-yellow">Slower</span> (redeploy all to old image)</td>
+    </tr>
+    <tr>
+      <td><strong>Resource Overhead</strong></td>
+      <td><span class="badge badge-red">2x</span> (both colors run simultaneously)</td>
+      <td><span class="badge badge-yellow">1.1-2x</span> (canary + stable)</td>
+      <td><span class="badge badge-green">1x</span> (in-place replacement)</td>
+    </tr>
+    <tr>
+      <td><strong>Traffic Control</strong></td>
+      <td><span class="badge badge-yellow">Binary</span> (all-or-nothing)</td>
+      <td><span class="badge badge-green">Granular</span> (weighted nginx upstream)</td>
+      <td><span class="badge badge-yellow">Per-instance</span> (nginx upstream list)</td>
+    </tr>
+    <tr>
+      <td><strong>Blast Radius</strong></td>
+      <td><span class="badge badge-red">100%</span> after cutover</td>
+      <td><span class="badge badge-green">10-50%</span> during stages</td>
+      <td><span class="badge badge-yellow">1/N</span> per instance</td>
+    </tr>
+    <tr>
+      <td><strong>Implementation Complexity</strong></td>
+      <td><span class="badge badge-green">Low</span></td>
+      <td><span class="badge badge-red">High</span> (GCD weight calc, observation periods)</td>
+      <td><span class="badge badge-yellow">Medium</span> (ordinal tracking)</td>
+    </tr>
+    <tr>
+      <td><strong>Best For</strong></td>
+      <td>Simple apps, quick releases</td>
+      <td>Critical services, risk-sensitive deploys</td>
+      <td>Stateful apps, multi-instance workloads</td>
+    </tr>
+    <tr>
+      <td><strong>Drain Period</strong></td>
+      <td>10s (configurable)</td>
+      <td>30s observation per stage</td>
+      <td>Per-batch sequential</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<!-- ============================================================ -->
+<h2><span class="num">Fig. 2</span> Pipeline Run State Machine</h2>
+<p class="caption">Valid state transitions for pipeline run execution. Terminal states shown in dark fill.</p>
+
+<div class="chart-container" style="text-align:center;">
+<svg width="800" height="220" viewBox="0 0 800 220">
+  <!-- States -->
+  <rect x="10" y="80" width="90" height="40" rx="20" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="55" y="105" text-anchor="middle" font-size="12" font-weight="600" fill="#1e3a5f">created</text>
+
+  <rect x="140" y="80" width="90" height="40" rx="20" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text x="185" y="105" text-anchor="middle" font-size="12" font-weight="600" fill="#92400e">queued</text>
+
+  <rect x="280" y="80" width="90" height="40" rx="20" fill="#ffedd5" stroke="#ea580c" stroke-width="2"/>
+  <text x="325" y="105" text-anchor="middle" font-size="12" font-weight="600" fill="#7c2d12">running</text>
+
+  <!-- Terminal states -->
+  <rect x="440" y="20" width="90" height="40" rx="20" fill="#065f46" stroke="#059669" stroke-width="2"/>
+  <text x="485" y="45" text-anchor="middle" font-size="12" font-weight="600" fill="#d1fae5">success</text>
+
+  <rect x="440" y="80" width="90" height="40" rx="20" fill="#991b1b" stroke="#dc2626" stroke-width="2"/>
+  <text x="485" y="105" text-anchor="middle" font-size="12" font-weight="600" fill="#fecaca">failed</text>
+
+  <rect x="440" y="140" width="100" height="40" rx="20" fill="#374151" stroke="#6b7280" stroke-width="2"/>
+  <text x="490" y="165" text-anchor="middle" font-size="12" font-weight="600" fill="#e5e7eb">cancelled</text>
+
+  <rect x="580" y="140" width="100" height="40" rx="20" fill="#374151" stroke="#6b7280" stroke-width="2"/>
+  <text x="630" y="165" text-anchor="middle" font-size="12" font-weight="600" fill="#e5e7eb">timed_out</text>
+
+  <!-- Arrows -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#6b7280"/>
+    </marker>
+  </defs>
+
+  <line x1="100" y1="100" x2="138" y2="100" stroke="#6b7280" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="230" y1="100" x2="278" y2="100" stroke="#6b7280" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="370" y1="85" x2="438" y2="50" stroke="#059669" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="370" y1="100" x2="438" y2="100" stroke="#dc2626" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="370" y1="115" x2="438" y2="155" stroke="#6b7280" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="370" y1="118" x2="578" y2="158" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrowhead)"/>
+
+  <!-- Labels on arrows -->
+  <text x="116" y="92" font-size="9" fill="#6b7280">queue</text>
+  <text x="248" y="92" font-size="9" fill="#6b7280">claim</text>
+  <text x="395" y="52" font-size="9" fill="#059669">pass</text>
+  <text x="395" y="92" font-size="9" fill="#dc2626">fail</text>
+  <text x="395" y="145" font-size="9" fill="#6b7280">cancel</text>
+  <text x="490" y="145" font-size="9" fill="#6b7280">timeout</text>
+</svg>
+</div>
+
+<!-- ============================================================ -->
+<h2><span class="num">Fig. 3</span> Deployment State Machine</h2>
+<p class="caption">State transitions for container deployments. Includes rollback and drain states.</p>
+
+<div class="chart-container" style="text-align:center;">
+<svg width="850" height="250" viewBox="0 0 850 250">
+  <!-- States -->
+  <rect x="10" y="90" width="90" height="40" rx="20" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="55" y="115" text-anchor="middle" font-size="12" font-weight="600" fill="#1e3a5f">pending</text>
+
+  <rect x="150" y="90" width="100" height="40" rx="20" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text x="200" y="115" text-anchor="middle" font-size="12" font-weight="600" fill="#92400e">deploying</text>
+
+  <rect x="310" y="90" width="80" height="40" rx="20" fill="#d1fae5" stroke="#059669" stroke-width="2"/>
+  <text x="350" y="115" text-anchor="middle" font-size="12" font-weight="600" fill="#065f46">active</text>
+
+  <rect x="450" y="90" width="90" height="40" rx="20" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text x="495" y="115" text-anchor="middle" font-size="12" font-weight="600" fill="#92400e">draining</text>
+
+  <!-- Terminal states -->
+  <rect x="600" y="30" width="90" height="40" rx="20" fill="#374151" stroke="#6b7280" stroke-width="2"/>
+  <text x="645" y="55" text-anchor="middle" font-size="12" font-weight="600" fill="#e5e7eb">stopped</text>
+
+  <rect x="600" y="100" width="110" height="40" rx="20" fill="#4c1d95" stroke="#7c3aed" stroke-width="2"/>
+  <text x="655" y="125" text-anchor="middle" font-size="12" font-weight="600" fill="#ede9fe">rolled_back</text>
+
+  <rect x="600" y="170" width="80" height="40" rx="20" fill="#991b1b" stroke="#dc2626" stroke-width="2"/>
+  <text x="640" y="195" text-anchor="middle" font-size="12" font-weight="600" fill="#fecaca">failed</text>
+
+  <!-- Arrows -->
+  <line x1="100" y1="110" x2="148" y2="110" stroke="#6b7280" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="250" y1="110" x2="308" y2="110" stroke="#6b7280" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="390" y1="110" x2="448" y2="110" stroke="#6b7280" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="540" y1="100" x2="598" y2="55" stroke="#6b7280" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="540" y1="115" x2="598" y2="118" stroke="#7c3aed" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- Failed from deploying -->
+  <line x1="200" y1="130" x2="200" y2="185" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <line x1="200" y1="185" x2="598" y2="190" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrowhead)"/>
+
+  <!-- Rolled_back from active -->
+  <path d="M 350 130 Q 350 180 598 125" stroke="#7c3aed" stroke-width="1.5" fill="none" stroke-dasharray="4 3" marker-end="url(#arrowhead)"/>
+
+  <!-- Labels -->
+  <text x="120" y="102" font-size="9" fill="#6b7280">start</text>
+  <text x="270" y="102" font-size="9" fill="#059669">healthy</text>
+  <text x="410" y="102" font-size="9" fill="#d97706">drain</text>
+  <text x="555" y="80" font-size="9" fill="#6b7280">stop</text>
+  <text x="555" y="122" font-size="9" fill="#7c3aed">rollback</text>
+  <text x="350" y="175" font-size="9" fill="#dc2626">fail</text>
+</svg>
+</div>
+
+<!-- ============================================================ -->
+<h2><span class="num">Fig. 4</span> Self-Healing Remediation Flow</h2>
+<p class="caption">Automated remediation cascade: sliding window health evaluation to restart/rollback decisions.</p>
+
+<div class="chart-container" style="text-align:center;">
+<svg width="900" height="380" viewBox="0 0 900 380">
+  <!-- Health Monitor Probe -->
+  <rect x="10" y="30" width="140" height="50" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="80" y="50" text-anchor="middle" font-size="11" font-weight="600" fill="#1e3a5f">Health Probe</text>
+  <text x="80" y="66" text-anchor="middle" font-size="9" fill="#6b7280">every 15 seconds</text>
+
+  <!-- Arrow -->
+  <line x1="150" y1="55" x2="188" y2="55" stroke="#6b7280" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- Sliding Window -->
+  <rect x="190" y="20" width="160" height="70" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text x="270" y="42" text-anchor="middle" font-size="11" font-weight="600" fill="#92400e">Sliding Window</text>
+  <text x="270" y="58" text-anchor="middle" font-size="9" fill="#78350f">10 checks, rolling</text>
+  <text x="270" y="74" text-anchor="middle" font-size="9" fill="#78350f">pass rate calculation</text>
+
+  <!-- Arrow -->
+  <line x1="350" y1="55" x2="398" y2="55" stroke="#6b7280" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- Decision Diamond: Threshold -->
+  <polygon points="470,10 540,55 470,100 400,55" fill="#f3f4f6" stroke="#6b7280" stroke-width="2"/>
+  <text x="470" y="50" text-anchor="middle" font-size="10" font-weight="600" fill="#374151">Pass</text>
+  <text x="470" y="66" text-anchor="middle" font-size="10" font-weight="600" fill="#374151">Rate?</text>
+
+  <!-- Healthy branch (up) -->
+  <line x1="470" y1="10" x2="470" y2="-20" stroke="#059669" stroke-width="2"/>
+  <rect x="410" y="-60" width="120" height="35" rx="8" fill="#d1fae5" stroke="#059669" stroke-width="2"/>
+  <text x="470" y="-38" text-anchor="middle" font-size="11" font-weight="600" fill="#065f46">Healthy</text>
+  <text x="540" y="5" font-size="9" fill="#059669">&ge; 80%</text>
+
+  <!-- Degraded branch (right-up) -->
+  <line x1="540" y1="40" x2="600" y2="40" stroke="#d97706" stroke-width="2"/>
+  <rect x="600" y="18" width="120" height="45" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text x="660" y="36" text-anchor="middle" font-size="11" font-weight="600" fill="#92400e">Degraded</text>
+  <text x="660" y="52" text-anchor="middle" font-size="9" fill="#78350f">log warning only</text>
+  <text x="575" y="33" font-size="9" fill="#d97706">50-79%</text>
+
+  <!-- Unhealthy branch (down) -->
+  <line x1="470" y1="100" x2="470" y2="128" stroke="#dc2626" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="490" y="118" font-size="9" fill="#dc2626">&lt; 50%</text>
+
+  <!-- Restart box -->
+  <rect x="390" y="130" width="160" height="50" rx="8" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+  <text x="470" y="150" text-anchor="middle" font-size="11" font-weight="600" fill="#991b1b">Restart Container</text>
+  <text x="470" y="168" text-anchor="middle" font-size="9" fill="#991b1b">docker restart</text>
+
+  <!-- Attempt counter -->
+  <line x1="470" y1="180" x2="470" y2="208" stroke="#6b7280" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- Decision Diamond: Attempts -->
+  <polygon points="470,210 540,255 470,300 400,255" fill="#f3f4f6" stroke="#6b7280" stroke-width="2"/>
+  <text x="470" y="250" text-anchor="middle" font-size="10" font-weight="600" fill="#374151">Attempt</text>
+  <text x="470" y="266" text-anchor="middle" font-size="10" font-weight="600" fill="#374151">&le; 3?</text>
+
+  <!-- Yes: retry with backoff (left loop) -->
+  <line x1="400" y1="255" x2="330" y2="255" stroke="#d97706" stroke-width="2"/>
+  <line x1="330" y1="255" x2="330" y2="155" stroke="#d97706" stroke-width="2"/>
+  <line x1="330" y1="155" x2="388" y2="155" stroke="#d97706" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="300" y="205" font-size="9" fill="#d97706" transform="rotate(-90,300,205)">backoff: 5s, 10s, 20s</text>
+  <text x="360" y="248" font-size="9" fill="#d97706">yes</text>
+
+  <!-- No: rollback (right) -->
+  <line x1="540" y1="255" x2="598" y2="255" stroke="#dc2626" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="560" y="248" font-size="9" fill="#dc2626">no (exhausted)</text>
+
+  <!-- Rollback box -->
+  <rect x="600" y="230" width="180" height="50" rx="8" fill="#4c1d95" stroke="#7c3aed" stroke-width="2"/>
+  <text x="690" y="250" text-anchor="middle" font-size="11" font-weight="600" fill="#ede9fe">Auto-Rollback</text>
+  <text x="690" y="268" text-anchor="middle" font-size="9" fill="#c4b5fd">deploy previous revision</text>
+
+  <!-- Rollback result -->
+  <line x1="690" y1="280" x2="690" y2="318" stroke="#6b7280" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <rect x="620" y="320" width="140" height="35" rx="8" fill="#374151" stroke="#6b7280" stroke-width="2"/>
+  <text x="690" y="343" text-anchor="middle" font-size="11" font-weight="600" fill="#e5e7eb">Status: rolled_back</text>
+
+  <!-- Healing events label -->
+  <rect x="10" y="320" width="280" height="45" rx="8" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1" stroke-dasharray="4 3"/>
+  <text x="150" y="340" text-anchor="middle" font-size="10" font-weight="600" fill="#5b21b6">healing_events table records:</text>
+  <text x="150" y="355" text-anchor="middle" font-size="9" fill="#7c3aed">health_degraded, restart_started, restart_succeeded/failed, rollback_started/succeeded/failed</text>
+</svg>
+</div>
+
+<!-- ============================================================ -->
+<h2><span class="num">Fig. 5</span> DAG-Based Pipeline Execution Model</h2>
+<p class="caption">Kahn's algorithm resolves task dependencies into parallel execution groups. Tasks within a group run concurrently.</p>
+
+<div class="chart-container" style="text-align:center;">
+<svg width="800" height="320" viewBox="0 0 800 320">
+  <!-- Group labels -->
+  <text x="140" y="20" text-anchor="middle" font-size="11" font-weight="600" fill="#6366f1">Group 0 (parallel)</text>
+  <text x="400" y="20" text-anchor="middle" font-size="11" font-weight="600" fill="#6366f1">Group 1 (sequential gate)</text>
+  <text x="650" y="20" text-anchor="middle" font-size="11" font-weight="600" fill="#6366f1">Group 2 (parallel)</text>
+
+  <!-- Dashed group boundaries -->
+  <rect x="30" y="30" width="220" height="260" rx="8" fill="none" stroke="#6366f1" stroke-width="1" stroke-dasharray="5 4"/>
+  <rect x="290" y="30" width="220" height="260" rx="8" fill="none" stroke="#6366f1" stroke-width="1" stroke-dasharray="5 4"/>
+  <rect x="540" y="30" width="220" height="260" rx="8" fill="none" stroke="#6366f1" stroke-width="1" stroke-dasharray="5 4"/>
+
+  <!-- Group 0: lint + test (parallel) -->
+  <rect x="70" y="80" width="140" height="55" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="140" y="100" text-anchor="middle" font-size="13" font-weight="700" fill="#1e3a5f">lint</text>
+  <text x="140" y="118" text-anchor="middle" font-size="9" fill="#6b7280">npm run lint</text>
+
+  <rect x="70" y="170" width="140" height="55" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="140" y="190" text-anchor="middle" font-size="13" font-weight="700" fill="#1e3a5f">test</text>
+  <text x="140" y="208" text-anchor="middle" font-size="9" fill="#6b7280">npm test (12 assertions)</text>
+
+  <!-- Group 1: build -->
+  <rect x="330" y="120" width="140" height="65" rx="10" fill="#ffedd5" stroke="#ea580c" stroke-width="2"/>
+  <text x="400" y="142" text-anchor="middle" font-size="13" font-weight="700" fill="#7c2d12">build</text>
+  <text x="400" y="158" text-anchor="middle" font-size="9" fill="#7c2d12">docker build -t</text>
+  <text x="400" y="172" text-anchor="middle" font-size="9" fill="#7c2d12">app:${{git.short_sha}}</text>
+
+  <!-- Group 2: deploy + notify (parallel) -->
+  <rect x="580" y="80" width="140" height="55" rx="10" fill="#d1fae5" stroke="#059669" stroke-width="2"/>
+  <text x="650" y="100" text-anchor="middle" font-size="13" font-weight="700" fill="#065f46">deploy</text>
+  <text x="650" y="118" text-anchor="middle" font-size="9" fill="#065f46">blue-green strategy</text>
+
+  <rect x="580" y="170" width="140" height="55" rx="10" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+  <text x="650" y="190" text-anchor="middle" font-size="13" font-weight="700" fill="#5b21b6">notify</text>
+  <text x="650" y="208" text-anchor="middle" font-size="9" fill="#5b21b6">Slack webhook</text>
+
+  <!-- Dependency arrows -->
+  <defs>
+    <marker id="arrow2" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#ea580c"/>
+    </marker>
+    <marker id="arrow3" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#059669"/>
+    </marker>
+  </defs>
+
+  <!-- lint → build -->
+  <line x1="210" y1="107" x2="328" y2="140" stroke="#ea580c" stroke-width="2" marker-end="url(#arrow2)"/>
+  <!-- test → build -->
+  <line x1="210" y1="197" x2="328" y2="163" stroke="#ea580c" stroke-width="2" marker-end="url(#arrow2)"/>
+  <!-- build → deploy -->
+  <line x1="470" y1="140" x2="578" y2="110" stroke="#059669" stroke-width="2" marker-end="url(#arrow3)"/>
+  <!-- build → notify -->
+  <line x1="470" y1="163" x2="578" y2="193" stroke="#059669" stroke-width="2" marker-end="url(#arrow3)"/>
+
+  <!-- depends_on labels -->
+  <text x="255" y="110" font-size="9" fill="#ea580c">depends_on</text>
+  <text x="255" y="185" font-size="9" fill="#ea580c">depends_on</text>
+  <text x="510" y="115" font-size="9" fill="#059669">depends_on</text>
+  <text x="510" y="185" font-size="9" fill="#059669">depends_on</text>
+
+  <!-- Timeline arrow at bottom -->
+  <line x1="30" y1="300" x2="760" y2="300" stroke="#374151" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="400" y="318" text-anchor="middle" font-size="11" fill="#374151">Execution Timeline &rarr;</text>
+</svg>
+</div>
+
+<!-- ============================================================ -->
+<h2><span class="num">Fig. 6</span> Technology Stack</h2>
+<p class="caption">Layered technology architecture from user interface to infrastructure.</p>
+
+<div class="chart-container" style="text-align:center;">
+<svg width="800" height="360" viewBox="0 0 800 360">
+  <!-- Layer 1: Frontend -->
+  <rect x="50" y="10" width="700" height="55" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="80" y="32" font-size="12" font-weight="700" fill="#1e3a5f">Frontend</text>
+  <text x="80" y="50" font-size="10" fill="#3b82f6">Next.js 16 (App Router) &bull; React 19 &bull; Tailwind CSS v4 &bull; @xyflow/react (DAG) &bull; recharts &bull; Material Symbols</text>
+
+  <!-- Layer 2: API -->
+  <rect x="50" y="75" width="700" height="55" rx="8" fill="#c7d2fe" stroke="#4f46e5" stroke-width="2"/>
+  <text x="80" y="97" font-size="12" font-weight="700" fill="#312e81">API Layer</text>
+  <text x="80" y="115" font-size="10" fill="#4f46e5">Next.js API Routes (Serverless) &bull; Zod Validation &bull; HMAC-SHA256 Webhook Verification &bull; Bearer Token Auth</text>
+
+  <!-- Layer 3: Backend Services -->
+  <rect x="50" y="140" width="700" height="55" rx="8" fill="#d1fae5" stroke="#059669" stroke-width="2"/>
+  <text x="80" y="162" font-size="12" font-weight="700" fill="#065f46">Backend Services</text>
+  <text x="80" y="180" font-size="10" fill="#059669">Supabase PostgreSQL (RLS) &bull; Supabase Auth (GitHub OAuth PKCE) &bull; Supabase Realtime &bull; Supabase Storage</text>
+
+  <!-- Layer 4: Pipeline Engine -->
+  <rect x="50" y="205" width="700" height="55" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text x="80" y="227" font-size="12" font-weight="700" fill="#92400e">Pipeline Engine</text>
+  <text x="80" y="245" font-size="10" fill="#d97706">YAML Parser (js-yaml) &bull; DAG Resolver (Kahn's Algorithm) &bull; State Machine &bull; Variable Resolver &bull; AES-256-GCM Crypto</text>
+
+  <!-- Layer 5: Runner Agent -->
+  <rect x="50" y="270" width="700" height="55" rx="8" fill="#ffedd5" stroke="#ea580c" stroke-width="2"/>
+  <text x="80" y="292" font-size="12" font-weight="700" fill="#7c2d12">Runner Agent</text>
+  <text x="80" y="310" font-size="10" fill="#ea580c">Node.js CLI (commander) &bull; execa (shell) &bull; Docker API &bull; Nginx Config &bull; Health Monitor &bull; Remediation Engine</text>
+
+  <!-- Layer 6: Infrastructure -->
+  <rect x="50" y="335" width="340" height="25" rx="4" fill="#f3f4f6" stroke="#6b7280" stroke-width="1"/>
+  <text x="220" y="352" text-anchor="middle" font-size="10" font-weight="600" fill="#374151">Vercel (Hosting) &bull; Docker (Containers)</text>
+
+  <rect x="410" y="335" width="340" height="25" rx="4" fill="#f3f4f6" stroke="#6b7280" stroke-width="1"/>
+  <text x="580" y="352" text-anchor="middle" font-size="10" font-weight="600" fill="#374151">pnpm Workspaces &bull; Turborepo &bull; tsup</text>
+</svg>
+</div>
+
+<!-- ============================================================ -->
+<h2><span class="num">Fig. 7</span> Security Architecture</h2>
+<p class="caption">Multi-layer security model covering encryption, authentication, authorization, and data protection.</p>
+
+<div class="chart-container">
+<div class="grid-2">
+  <div>
+    <h3>Encryption &amp; Secrets</h3>
+    <table>
+      <tr><td><strong>Algorithm</strong></td><td>AES-256-GCM (authenticated encryption)</td></tr>
+      <tr><td><strong>Key Derivation</strong></td><td>SHA-256 hash of DEPLOYX_SECRET_KEY</td></tr>
+      <tr><td><strong>Protected Data</strong></td><td>Project secrets, GitHub tokens, webhook secrets</td></tr>
+      <tr><td><strong>IV</strong></td><td>Random 12-byte per encryption (stored with ciphertext)</td></tr>
+      <tr><td><strong>Auth Tag</strong></td><td>16-byte GCM tag appended to ciphertext</td></tr>
+    </table>
+
+    <h3>Webhook Verification</h3>
+    <table>
+      <tr><td><strong>Algorithm</strong></td><td>HMAC-SHA256</td></tr>
+      <tr><td><strong>Comparison</strong></td><td>crypto.timingSafeEqual() (constant-time)</td></tr>
+      <tr><td><strong>Format</strong></td><td>X-Hub-Signature-256: sha256=&lt;hex&gt;</td></tr>
+    </table>
+  </div>
+  <div>
+    <h3>Authentication Flows</h3>
+    <table>
+      <tr><td><strong>Dashboard Users</strong></td><td>GitHub OAuth (PKCE) &rarr; Supabase JWT</td></tr>
+      <tr><td><strong>Runner Agents</strong></td><td>Bearer token &rarr; SHA-256 hash lookup</td></tr>
+      <tr><td><strong>Webhook Events</strong></td><td>HMAC-SHA256 signature verification</td></tr>
+      <tr><td><strong>Service Client</strong></td><td>Supabase service_role key (bypasses RLS)</td></tr>
+    </table>
+
+    <h3>Authorization (RBAC)</h3>
+    <table>
+      <tr><td><strong>Row-Level Security</strong></td><td>84 RLS policies across 29 tables</td></tr>
+      <tr><td><strong>Role Hierarchy</strong></td><td>Viewer &lt; Developer &lt; Admin &lt; Owner</td></tr>
+      <tr><td><strong>Scope Functions</strong></td><td>is_org_member(), has_org_role()</td></tr>
+      <tr><td><strong>Per-Project</strong></td><td>project_permissions (trigger, approve, rollback, edit)</td></tr>
+    </table>
+  </div>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<h2><span class="num">Fig. 8</span> RBAC Permission Matrix</h2>
+<p class="caption">Role-based access control matrix showing permissions per organization role.</p>
+
+<div class="chart-container">
+<table>
+  <thead>
+    <tr>
+      <th>Permission</th>
+      <th>Viewer</th>
+      <th>Developer</th>
+      <th>Admin</th>
+      <th>Owner</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>View projects, pipelines, deployments</td>
+      <td><span class="badge badge-green">Yes</span></td>
+      <td><span class="badge badge-green">Yes</span></td>
+      <td><span class="badge badge-green">Yes</span></td>
+      <td><span class="badge badge-green">Yes</span></td>
+    </tr>
+    <tr>
+      <td>View real-time logs &amp; DAG</td>
+      <td><span class="badge badge-green">Yes</span></td>
+      <td><span class="badge badge-green">Yes</span></td>
+      <td><span class="badge badge-green">Yes</span></td>
+      <td><span class="badge badge-green">Yes</span></td>
+    </tr>
+    <tr>
+      <td>View metrics, SLA, audit log</td>
+      <td><span class="badge badge-green">Yes</span></td>
+      <td><span class="badge badge-green">Yes</span></td>
+      <td><span class="badge badge-green">Yes</span></td>
+      <td><span class="badge badge-green">Yes</span></td>
+    </tr>
+    <tr>
+      <td>Create &amp; edit projects</td>
+      <td>&mdash;</td>
+      <td><span class="badge badge-green">Yes</span></td>
+      <td><span class="badge badge-green">Yes</span></td>
+      <td><span class="badge badge-green">Yes</span></td>
+    </tr>
+    <tr>
+      <td>Create &amp; edit pipelines</td>
+      <td>&mdash;</td>
+      <td><span class="badge badge-green">Yes</span></td>
+      <td><span class="badge badge-green">Yes</span></td>
+      <td><span class="badge badge-green">Yes</span></td>
+    </tr>
+    <tr>
+      <td>Trigger pipeline runs</td>
+      <td>&mdash;</td>
+      <td><span class="badge badge-green">Yes</span></td>
+      <td><span class="badge badge-green">Yes</span></td>
+      <td><span class="badge badge-green">Yes</span></td>
+    </tr>
+    <tr>
+      <td>Approve deployments</td>
+      <td>&mdash;</td>
+      <td><span class="badge badge-green">Yes</span></td>
+      <td><span class="badge badge-green">Yes</span></td>
+      <td><span class="badge badge-green">Yes</span></td>
+    </tr>
+    <tr>
+      <td>Manage project secrets</td>
+      <td>&mdash;</td>
+      <td><span class="badge badge-green">Yes</span></td>
+      <td><span class="badge badge-green">Yes</span></td>
+      <td><span class="badge badge-green">Yes</span></td>
+    </tr>
+    <tr>
+      <td>Configure webhooks &amp; schedules</td>
+      <td>&mdash;</td>
+      <td><span class="badge badge-green">Yes</span></td>
+      <td><span class="badge badge-green">Yes</span></td>
+      <td><span class="badge badge-green">Yes</span></td>
+    </tr>
+    <tr>
+      <td>Rollback deployments</td>
+      <td>&mdash;</td>
+      <td>&mdash;</td>
+      <td><span class="badge badge-green">Yes</span></td>
+      <td><span class="badge badge-green">Yes</span></td>
+    </tr>
+    <tr>
+      <td>Register &amp; manage runners</td>
+      <td>&mdash;</td>
+      <td>&mdash;</td>
+      <td><span class="badge badge-green">Yes</span></td>
+      <td><span class="badge badge-green">Yes</span></td>
+    </tr>
+    <tr>
+      <td>Set alert rules</td>
+      <td>&mdash;</td>
+      <td>&mdash;</td>
+      <td><span class="badge badge-green">Yes</span></td>
+      <td><span class="badge badge-green">Yes</span></td>
+    </tr>
+    <tr>
+      <td>Invite &amp; manage team members</td>
+      <td>&mdash;</td>
+      <td>&mdash;</td>
+      <td><span class="badge badge-green">Yes</span></td>
+      <td><span class="badge badge-green">Yes</span></td>
+    </tr>
+    <tr>
+      <td>Delete projects</td>
+      <td>&mdash;</td>
+      <td>&mdash;</td>
+      <td><span class="badge badge-green">Yes</span></td>
+      <td><span class="badge badge-green">Yes</span></td>
+    </tr>
+    <tr>
+      <td>Update organization settings</td>
+      <td>&mdash;</td>
+      <td>&mdash;</td>
+      <td>&mdash;</td>
+      <td><span class="badge badge-green">Yes</span></td>
+    </tr>
+    <tr>
+      <td>Delete organization</td>
+      <td>&mdash;</td>
+      <td>&mdash;</td>
+      <td>&mdash;</td>
+      <td><span class="badge badge-green">Yes</span></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<!-- ============================================================ -->
+<h2><span class="num">Fig. 9</span> System Metrics Summary</h2>
+<p class="caption">Key quantitative metrics of the DeployX platform implementation.</p>
+
+<div class="chart-container">
+<div style="display:grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
+  <div class="metric-card" style="background:#eef2ff;">
+    <div class="value" style="color:#4338ca;">29</div>
+    <div class="label">Database Tables</div>
+  </div>
+  <div class="metric-card" style="background:#ecfdf5;">
+    <div class="value" style="color:#065f46;">84</div>
+    <div class="label">RLS Policies</div>
+  </div>
+  <div class="metric-card" style="background:#fff7ed;">
+    <div class="value" style="color:#c2410c;">17</div>
+    <div class="label">Custom Enums</div>
+  </div>
+  <div class="metric-card" style="background:#fef2f2;">
+    <div class="value" style="color:#991b1b;">253+</div>
+    <div class="label">Test Cases</div>
+  </div>
+  <div class="metric-card" style="background:#f5f3ff;">
+    <div class="value" style="color:#5b21b6;">18+</div>
+    <div class="label">API Endpoints</div>
+  </div>
+  <div class="metric-card" style="background:#fef3c7;">
+    <div class="value" style="color:#92400e;">10</div>
+    <div class="label">Realtime Tables</div>
+  </div>
+  <div class="metric-card" style="background:#dbeafe;">
+    <div class="value" style="color:#1e40af;">3</div>
+    <div class="label">Deploy Strategies</div>
+  </div>
+  <div class="metric-card" style="background:#d1fae5;">
+    <div class="value" style="color:#065f46;">4</div>
+    <div class="label">RBAC Roles</div>
+  </div>
+  <div class="metric-card" style="background:#ffedd5;">
+    <div class="value" style="color:#7c2d12;">3</div>
+    <div class="label">Deploy Targets</div>
+  </div>
+  <div class="metric-card" style="background:#fee2e2;">
+    <div class="value" style="color:#991b1b;">12</div>
+    <div class="label">Healing Event Types</div>
+  </div>
+  <div class="metric-card" style="background:#f3f4f6;">
+    <div class="value" style="color:#374151;">57</div>
+    <div class="label">Database Indexes</div>
+  </div>
+  <div class="metric-card" style="background:#ede9fe;">
+    <div class="value" style="color:#4c1d95;">7</div>
+    <div class="label">DB Functions</div>
+  </div>
+</div>
+</div>
+
+<p style="margin-top:40px; text-align:center; color:#9ca3af; font-size:12px;">
+  Generated for DeployX research paper &mdash; All data derived from codebase analysis (April 2026)
+</p>
+
+</body>
+</html>

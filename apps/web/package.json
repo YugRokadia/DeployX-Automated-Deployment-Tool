@@ -1,0 +1,36 @@
+{
+  "name": "web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@dagrejs/dagre": "^3.0.0",
+    "@deployx/pipeline-engine": "workspace:*",
+    "@deployx/shared": "workspace:*",
+    "@supabase/ssr": "^0.6.1",
+    "@supabase/supabase-js": "^2.49.0",
+    "@xyflow/react": "^12.10.2",
+    "next": "16.2.2",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "recharts": "^3.8.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/dagre": "^0.7.54",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.2",
+    "tailwindcss": "^4",
+    "typescript": "^5",
+    "vitest": "^3.2.4"
+  }
+}

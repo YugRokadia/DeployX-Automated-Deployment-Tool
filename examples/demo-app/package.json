@@ -1,0 +1,14 @@
+{
+  "name": "deployx-demo-app",
+  "version": "1.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node test.js",
+    "build": "echo 'No build step needed'"
+  },
+  "dependencies": {
+    "express": "^4.21.0"
+  }
+}

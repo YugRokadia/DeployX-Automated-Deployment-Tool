@@ -1,0 +1,208 @@
+<mxfile host="app.diagrams.net" agent="DeployX">
+  <diagram id="arch-1" name="System Architecture">
+    <mxGraphModel dx="2054" dy="1185" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;fontSize=22;fontStyle=1;align=center;fillColor=none;strokeColor=none;fontColor=#1a1a2e;" value="DeployX — System Architecture" vertex="1">
+          <mxGeometry height="40" width="800" x="400" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="github" parent="1" style="shape=cloud;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;fontColor=#333333;shadow=1;" value="&lt;b&gt;GitHub&lt;/b&gt;&lt;br&gt;OAuth Provider&lt;br&gt;Webhook Source&lt;br&gt;Git Repository" vertex="1">
+          <mxGeometry height="120" width="200" x="80" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="browser" parent="1" style="shape=mxgraph.aws3.client;whiteSpace=wrap;html=1;fillColor=#D4E1F5;strokeColor=#3B82F6;fontSize=11;fontColor=#1e3a5f;shadow=1;rounded=1;" value="&lt;b&gt;Developer Browser&lt;/b&gt;&lt;br&gt;Dashboard UI&lt;br&gt;(React 19 SPA)" vertex="1">
+          <mxGeometry height="100" width="200" x="680" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="cp-container" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEF2FF;strokeColor=#6366F1;strokeWidth=2;dashed=1;dashPattern=5 5;arcSize=10;" value="" vertex="1">
+          <mxGeometry height="300" width="960" x="320" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="cp-label" parent="1" style="text;html=1;fontSize=14;fontStyle=1;align=left;fillColor=none;strokeColor=none;fontColor=#4338CA;" value="CONTROL PLANE (Cloud)" vertex="1">
+          <mxGeometry height="24" width="300" x="340" y="248" as="geometry" />
+        </mxCell>
+        <mxCell id="vercel" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;strokeWidth=2;fontSize=10;fontColor=#1e3a5f;align=left;spacingLeft=10;spacingRight=10;verticalAlign=top;spacingTop=5;shadow=1;" value="&lt;b&gt;Vercel&lt;/b&gt;&lt;br&gt;&lt;hr&gt;&lt;b&gt;Next.js 16 App Router&lt;/b&gt;&lt;br&gt;━━━━━━━━━━━━━━&lt;br&gt;Dashboard (React 19)&lt;br&gt;API Routes (Serverless)&lt;br&gt;━━━━━━━━━━━━━━&lt;br&gt;• Runner API (/api/runner/*)&lt;br&gt;• Webhook API (/api/webhooks/*)&lt;br&gt;• GitHub API (/api/github/*)&lt;br&gt;• Cron API (/api/cron/*)" vertex="1">
+          <mxGeometry height="240" width="280" x="340" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="supabase" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D1FAE5;strokeColor=#059669;strokeWidth=2;fontSize=10;fontColor=#064e3b;align=left;spacingLeft=10;spacingRight=10;verticalAlign=top;spacingTop=5;shadow=1;" value="&lt;b&gt;Supabase&lt;/b&gt;&lt;br&gt;&lt;hr&gt;&lt;b&gt;PostgreSQL + Services&lt;/b&gt;&lt;br&gt;━━━━━━━━━━━━━━&lt;br&gt;• PostgreSQL (29 tables, RLS)&lt;br&gt;• Auth (GitHub OAuth, PKCE)&lt;br&gt;• Realtime (10 tables)&lt;br&gt;• Storage (build artifacts)&lt;br&gt;• Edge Functions&lt;br&gt;━━━━━━━━━━━━━━&lt;br&gt;84 RLS policies&lt;br&gt;17 enums, 7 functions" vertex="1">
+          <mxGeometry height="240" width="280" x="680" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="shared" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;strokeWidth=2;fontSize=10;fontColor=#78350f;align=left;spacingLeft=10;spacingRight=10;verticalAlign=top;spacingTop=5;shadow=1;" value="&lt;b&gt;Shared Packages&lt;/b&gt;&lt;br&gt;&lt;hr&gt;&lt;b&gt;@deployx/shared&lt;/b&gt;&lt;br&gt;Zod Validators, Types,&lt;br&gt;AES-256-GCM Crypto,&lt;br&gt;Constants&lt;br&gt;&lt;br&gt;&lt;b&gt;@deployx/pipeline-engine&lt;/b&gt;&lt;br&gt;YAML Parser, DAG Resolver,&lt;br&gt;State Machine" vertex="1">
+          <mxGeometry height="240" width="240" x="1020" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="runner-container" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF7ED;strokeColor=#EA580C;strokeWidth=2;dashed=1;dashPattern=5 5;arcSize=10;" value="" vertex="1">
+          <mxGeometry height="340" width="700" x="40" y="620" as="geometry" />
+        </mxCell>
+        <mxCell id="runner-label" parent="1" style="text;html=1;fontSize=14;fontStyle=1;align=left;fillColor=none;strokeColor=none;fontColor=#C2410C;" value="RUNNER AGENT (Self-Hosted Machine)" vertex="1">
+          <mxGeometry height="24" width="400" x="60" y="628" as="geometry" />
+        </mxCell>
+        <mxCell id="runner-cli" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEDD5;strokeColor=#EA580C;strokeWidth=2;fontSize=10;fontColor=#7c2d12;align=left;spacingLeft=10;verticalAlign=top;spacingTop=5;shadow=1;" value="&lt;b&gt;@deployx/runner CLI&lt;/b&gt;&lt;br&gt;&lt;hr&gt;• register / start / status&lt;br&gt;• Job Poller (5s interval)&lt;br&gt;• Heartbeat (10s interval)&lt;br&gt;• Bearer Token Auth" vertex="1">
+          <mxGeometry height="130" width="200" x="60" y="660" as="geometry" />
+        </mxCell>
+        <mxCell id="executor" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEDD5;strokeColor=#EA580C;strokeWidth=2;fontSize=10;fontColor=#7c2d12;align=left;spacingLeft=10;verticalAlign=top;spacingTop=5;shadow=1;" value="&lt;b&gt;Pipeline Executor&lt;/b&gt;&lt;br&gt;&lt;hr&gt;• DAG Walk (parallel groups)&lt;br&gt;• Step Executor (execa)&lt;br&gt;• Variable Resolver&lt;br&gt;• Log Streamer (500ms batch)&lt;br&gt;• Git Clone (shallow)" vertex="1">
+          <mxGeometry height="130" width="200" x="290" y="660" as="geometry" />
+        </mxCell>
+        <mxCell id="deployers" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEDD5;strokeColor=#EA580C;strokeWidth=2;fontSize=10;fontColor=#7c2d12;align=left;spacingLeft=10;verticalAlign=top;spacingTop=5;shadow=1;" value="&lt;b&gt;Deployer Factory&lt;/b&gt;&lt;br&gt;&lt;hr&gt;• Blue-Green (default)&lt;br&gt;• Canary (staged rollout)&lt;br&gt;• Rolling (ordinal update)&lt;br&gt;• Railway / Fly.io adapters" vertex="1">
+          <mxGeometry height="130" width="200" x="520" y="660" as="geometry" />
+        </mxCell>
+        <mxCell id="health" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEDD5;strokeColor=#EA580C;strokeWidth=2;fontSize=10;fontColor=#7c2d12;align=left;spacingLeft=10;verticalAlign=top;spacingTop=5;shadow=1;" value="&lt;b&gt;Health Monitor&lt;/b&gt;&lt;br&gt;&lt;hr&gt;• Probe every 15s&lt;br&gt;• Sliding Window (10 checks)&lt;br&gt;• Remediation Engine&lt;br&gt;• Auto-restart (3 attempts)&lt;br&gt;• Auto-rollback" vertex="1">
+          <mxGeometry height="130" width="200" x="60" y="810" as="geometry" />
+        </mxCell>
+        <mxCell id="container-mgr" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEDD5;strokeColor=#EA580C;strokeWidth=2;fontSize=10;fontColor=#7c2d12;align=left;spacingLeft=10;verticalAlign=top;spacingTop=5;shadow=1;" value="&lt;b&gt;Infrastructure&lt;/b&gt;&lt;br&gt;&lt;hr&gt;• Container Manager&lt;br&gt;• Port Allocator (10000-10999)&lt;br&gt;• Nginx Config Generator&lt;br&gt;• Docker Client (execa)" vertex="1">
+          <mxGeometry height="130" width="200" x="290" y="810" as="geometry" />
+        </mxCell>
+        <mxCell id="targets-container" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0FDF4;strokeColor=#16A34A;strokeWidth=2;dashed=1;dashPattern=5 5;arcSize=10;" value="" vertex="1">
+          <mxGeometry height="340" width="460" x="820" y="620" as="geometry" />
+        </mxCell>
+        <mxCell id="targets-label" parent="1" style="text;html=1;fontSize=14;fontStyle=1;align=left;fillColor=none;strokeColor=none;fontColor=#15803D;" value="EXECUTION TARGETS (Pluggable)" vertex="1">
+          <mxGeometry height="24" width="400" x="840" y="628" as="geometry" />
+        </mxCell>
+        <mxCell id="docker-local" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;strokeWidth=2;fontSize=10;fontColor=#14532d;align=left;spacingLeft=10;verticalAlign=top;spacingTop=5;shadow=1;" value="&lt;b&gt;Docker Local&lt;/b&gt;&lt;br&gt;&lt;hr&gt;• Docker Daemon&lt;br&gt;• deployx-net network&lt;br&gt;• Nginx proxy containers&lt;br&gt;• App containers (labeled)&lt;br&gt;• Health: docker exec wget" vertex="1">
+          <mxGeometry height="140" width="200" x="840" y="660" as="geometry" />
+        </mxCell>
+        <mxCell id="railway" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;strokeWidth=2;fontSize=10;fontColor=#14532d;align=left;spacingLeft=10;verticalAlign=top;spacingTop=5;shadow=1;" value="&lt;b&gt;Railway&lt;/b&gt;&lt;br&gt;&lt;hr&gt;• GraphQL API&lt;br&gt;• RAILWAY_API_TOKEN&lt;br&gt;• Blue-green only" vertex="1">
+          <mxGeometry height="100" width="200" x="1060" y="660" as="geometry" />
+        </mxCell>
+        <mxCell id="flyio" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;strokeWidth=2;fontSize=10;fontColor=#14532d;align=left;spacingLeft=10;verticalAlign=top;spacingTop=5;shadow=1;" value="&lt;b&gt;Fly.io&lt;/b&gt;&lt;br&gt;&lt;hr&gt;• REST API&lt;br&gt;• FLY_API_TOKEN&lt;br&gt;• Blue-green only" vertex="1">
+          <mxGeometry height="100" width="200" x="1060" y="780" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow-gh-vercel" edge="1" parent="1" source="github" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#6366F1;strokeWidth=2;fontColor=#4338CA;fontSize=10;" target="vercel">
+          <mxGeometry relative="1" as="geometry" />
+          <Array as="points">
+            <mxPoint x="180" y="220" />
+            <mxPoint x="480" y="220" />
+          </Array>
+        </mxCell>
+        <mxCell id="arrow-gh-vercel-label" connectable="0" parent="arrow-gh-vercel" style="edgeLabel;html=1;align=center;fontSize=9;fontColor=#4338CA;" value="OAuth Callback&lt;br&gt;Webhook POST&lt;br&gt;(HMAC-SHA256)" vertex="1">
+          <mxGeometry relative="1" x="0.2" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow-browser-vercel" edge="1" parent="1" source="browser" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#2563EB;strokeWidth=2;fontColor=#2563EB;fontSize=10;entryX=0.793;entryY=0.008;entryDx=0;entryDy=0;entryPerimeter=0;" target="vercel">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow-browser-vercel-label" connectable="0" parent="arrow-browser-vercel" style="edgeLabel;html=1;align=center;fontSize=9;fontColor=#2563EB;" value="HTTPS + JWT" vertex="1">
+          <mxGeometry relative="1" x="-0.2" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow-supabase-browser" edge="1" parent="1" source="supabase" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#059669;strokeWidth=2;fontColor=#059669;fontSize=10;dashed=1;" target="browser">
+          <mxGeometry relative="1" as="geometry" />
+          <Array as="points">
+            <mxPoint x="820" y="220" />
+            <mxPoint x="780" y="220" />
+          </Array>
+        </mxCell>
+        <mxCell id="arrow-supabase-browser-label" connectable="0" parent="arrow-supabase-browser" style="edgeLabel;html=1;align=center;fontSize=9;fontColor=#059669;" value="Realtime&lt;br&gt;WebSocket" vertex="1">
+          <mxGeometry relative="1" x="0.3" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow-vercel-supabase" edge="1" parent="1" source="vercel" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#7C3AED;strokeWidth=2;fontColor=#7C3AED;fontSize=10;" target="supabase">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow-vercel-supabase-label" connectable="0" parent="arrow-vercel-supabase" style="edgeLabel;html=1;align=center;fontSize=9;fontColor=#7C3AED;" value="Supabase Client&lt;br&gt;(service role + anon)" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow-vercel-shared" edge="1" parent="1" source="vercel" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#D97706;strokeWidth=1;fontColor=#D97706;fontSize=9;dashed=1;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" target="shared">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow-vercel-shared-label" connectable="0" parent="arrow-vercel-shared" style="edgeLabel;html=1;align=center;fontSize=9;fontColor=#D97706;" value="imports" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow-runner-vercel" edge="1" parent="1" source="runner-cli" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#EA580C;strokeWidth=2;fontColor=#EA580C;fontSize=10;" target="vercel">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="160" y="550" />
+              <mxPoint x="480" y="550" />
+            </Array>
+          </mxGeometry>
+          <Array as="points">
+            <mxPoint x="40" y="600" />
+            <mxPoint x="40" y="560" />
+            <mxPoint x="480" y="560" />
+          </Array>
+        </mxCell>
+        <mxCell id="arrow-runner-vercel-label" connectable="0" parent="arrow-runner-vercel" style="edgeLabel;html=1;align=center;fontSize=9;fontColor=#EA580C;" value="HTTP Poll (5s)&lt;br&gt;+ Status Reports&lt;br&gt;+ Log Streaming&lt;br&gt;(Bearer Token)" vertex="1">
+          <mxGeometry relative="1" x="-0.3" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow-runner-github" edge="1" parent="1" source="executor" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#666666;strokeWidth=1;fontColor=#666666;fontSize=9;dashed=1;entryX=0.55;entryY=0.95;entryDx=0;entryDy=0;entryPerimeter=0;" target="github">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="280" y="725" />
+              <mxPoint x="280" y="194" />
+            </Array>
+          </mxGeometry>
+          <Array as="points">
+            <mxPoint x="390" y="600" />
+            <mxPoint x="20" y="600" />
+            <mxPoint x="20" y="140" />
+          </Array>
+        </mxCell>
+        <mxCell id="arrow-runner-github-label" connectable="0" parent="arrow-runner-github" style="edgeLabel;html=1;align=center;fontSize=9;fontColor=#666666;" value="git clone&lt;br&gt;(HTTPS + token)" vertex="1">
+          <mxGeometry relative="1" x="-0.5" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow-exec-deploy" edge="1" parent="1" source="executor" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#EA580C;strokeWidth=1;fontColor=#7c2d12;fontSize=9;" target="deployers">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow-exec-deploy-label" connectable="0" parent="arrow-exec-deploy" style="edgeLabel;html=1;align=center;fontSize=9;fontColor=#7c2d12;" value="deploy()" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow-deploy-docker" edge="1" parent="1" source="deployers" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#16A34A;strokeWidth=2;fontColor=#16A34A;fontSize=10;" target="docker-local">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="820" y="725" />
+              <mxPoint x="820" y="725" />
+            </Array>
+          </mxGeometry>
+          <Array as="points">
+            <mxPoint x="780" y="725" />
+            <mxPoint x="780" y="730" />
+          </Array>
+        </mxCell>
+        <mxCell id="arrow-deploy-docker-label" connectable="0" parent="arrow-deploy-docker" style="edgeLabel;html=1;align=center;fontSize=9;fontColor=#16A34A;" value="Docker API&lt;br&gt;(docker run/stop/exec)" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow-health-docker" edge="1" parent="1" source="health" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#16A34A;strokeWidth=1;fontColor=#16A34A;fontSize=9;dashed=1;" target="docker-local">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="160" y="970" />
+              <mxPoint x="940" y="970" />
+            </Array>
+          </mxGeometry>
+          <Array as="points">
+            <mxPoint x="160" y="960" />
+            <mxPoint x="780" y="960" />
+            <mxPoint x="780" y="800" />
+          </Array>
+        </mxCell>
+        <mxCell id="arrow-health-docker-label" connectable="0" parent="arrow-health-docker" style="edgeLabel;html=1;align=center;fontSize=9;fontColor=#16A34A;" value="docker exec wget&lt;br&gt;(health probes)" vertex="1">
+          <mxGeometry relative="1" x="0.3" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow-deploy-railway" edge="1" parent="1" source="deployers" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#16A34A;strokeWidth=1;fontColor=#16A34A;fontSize=9;dashed=1;" target="railway">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="620" y="590" />
+              <mxPoint x="1160" y="590" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arrow-deploy-flyio" edge="1" parent="1" source="deployers" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#16A34A;strokeWidth=1;fontColor=#16A34A;fontSize=9;dashed=1;" target="flyio">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="760" y="725" />
+              <mxPoint x="760" y="830" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arrow-cli-exec" edge="1" parent="1" source="runner-cli" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#EA580C;strokeWidth=1;fontColor=#7c2d12;fontSize=9;" target="executor">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow-cli-exec-label" connectable="0" parent="arrow-cli-exec" style="edgeLabel;html=1;align=center;fontSize=9;fontColor=#7c2d12;" value="executePipeline()" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow-cli-health" edge="1" parent="1" source="runner-cli" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#EA580C;strokeWidth=1;fontColor=#7c2d12;fontSize=9;" target="health">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow-cli-health-label" connectable="0" parent="arrow-cli-health" style="edgeLabel;html=1;align=center;fontSize=9;fontColor=#7c2d12;" value="monitor()" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="legend" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8f8f8;strokeColor=#cccccc;fontSize=10;fontColor=#555555;align=left;spacingLeft=10;verticalAlign=top;spacingTop=5;" value="&lt;b&gt;Legend&lt;/b&gt;&lt;br&gt;━━ Solid line = primary data flow&lt;br&gt;╌╌ Dashed line = secondary/async flow&lt;br&gt;&lt;br&gt;pnpm workspaces + Turborepo monorepo" vertex="1">
+          <mxGeometry height="110" width="190" x="540" y="810" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

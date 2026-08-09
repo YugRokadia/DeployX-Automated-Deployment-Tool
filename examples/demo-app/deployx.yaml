@@ -1,0 +1,25 @@
+name: demo-pipeline
+tasks:
+  test:
+    steps:
+      - name: Install dependencies
+        command: npm ci
+      - name: Run tests
+        command: npm test
+
+  build:
+    depends_on: [test]
+    steps:
+      - name: Build Docker image
+        command: docker build -t demo-app:${{ git.short_sha }} .
+    deploy:
+      driver: docker_local
+      strategy: blue_green
+      port: 3000
+      image: demo-app:${{ git.short_sha }}
+      health_check:
+        path: /health
+        interval_seconds: 10
+        timeout_seconds: 5
+        retries: 3
+        start_period_seconds: 15

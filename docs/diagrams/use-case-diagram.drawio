@@ -1,0 +1,264 @@
+<mxfile host="app.diagrams.net" agent="DeployX">
+  <diagram id="uc-1" name="Use Case Diagram">
+    <mxGraphModel dx="2054" dy="1185" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;fontSize=22;fontStyle=1;align=center;fillColor=none;strokeColor=none;fontColor=#1a1a2e;" value="DeployX — UML Use Case Diagram" vertex="1">
+          <mxGeometry height="40" width="900" x="350" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="actor-dev" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#DBEAFE;strokeColor=#2563EB;fontSize=12;fontStyle=1;fontColor=#1E3A5F;" value="Developer" vertex="1">
+          <mxGeometry height="60" width="40" x="40" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="actor-admin" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#FEE2E2;strokeColor=#DC2626;fontSize=12;fontStyle=1;fontColor=#991B1B;" value="Admin" vertex="1">
+          <mxGeometry height="60" width="40" x="40" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="actor-viewer" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#F3F4F6;strokeColor=#6B7280;fontSize=12;fontStyle=1;fontColor=#374151;" value="Viewer" vertex="1">
+          <mxGeometry height="60" width="40" x="40" y="640" as="geometry" />
+        </mxCell>
+        <mxCell id="actor-github" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#F5F5F5;strokeColor=#666666;fontSize=11;fontStyle=1;fontColor=#333333;" value="GitHub&lt;br&gt;(External)" vertex="1">
+          <mxGeometry height="60" width="40" x="1510" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="actor-runner" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#FFEDD5;strokeColor=#EA580C;fontSize=11;fontStyle=1;fontColor=#7C2D12;" value="Runner Agent&lt;br&gt;(System)" vertex="1">
+          <mxGeometry height="60" width="40" x="1510" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="actor-docker" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#DCFCE7;strokeColor=#16A34A;fontSize=11;fontStyle=1;fontColor=#14532D;" value="Docker Daemon&lt;br&gt;(System)" vertex="1">
+          <mxGeometry height="60" width="40" x="1510" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="system" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAFAFA;strokeColor=#1a1a2e;strokeWidth=2;dashed=0;arcSize=5;" value="" vertex="1">
+          <mxGeometry height="1000" width="1300" x="160" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="sys-label" parent="1" style="text;html=1;fontSize=18;fontStyle=1;align=center;fillColor=none;strokeColor=none;fontColor=#1a1a2e;" value="DeployX CI/CD Platform" vertex="1">
+          <mxGeometry height="30" width="400" x="580" y="68" as="geometry" />
+        </mxCell>
+        <mxCell id="sub-auth" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEF2FF;strokeColor=#6366F1;strokeWidth=1;dashed=1;fontSize=12;fontStyle=1;fontColor=#4338CA;verticalAlign=top;spacingTop=2;arcSize=10;" value="Authentication" vertex="1">
+          <mxGeometry height="170" width="250" x="180" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-signin" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#C7D2FE;strokeColor=#4F46E5;fontSize=10;fontColor=#312E81;" value="Sign in with GitHub" vertex="1">
+          <mxGeometry height="40" width="140" x="200" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-bootstrap" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#C7D2FE;strokeColor=#4F46E5;fontSize=10;fontColor=#312E81;" value="Bootstrap org on first login" vertex="1">
+          <mxGeometry height="40" width="160" x="210" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="sub-projects" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEF2FF;strokeColor=#6366F1;strokeWidth=1;dashed=1;fontSize=12;fontStyle=1;fontColor=#4338CA;verticalAlign=top;spacingTop=2;arcSize=10;" value="Project Management" vertex="1">
+          <mxGeometry height="250" width="280" x="180" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-create-proj" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#C7D2FE;strokeColor=#4F46E5;fontSize=10;fontColor=#312E81;" value="Create project" vertex="1">
+          <mxGeometry height="35" width="130" x="210" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-import" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#C7D2FE;strokeColor=#4F46E5;fontSize=10;fontColor=#312E81;" value="Import from GitHub" vertex="1">
+          <mxGeometry height="35" width="140" x="210" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-secrets" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#C7D2FE;strokeColor=#4F46E5;fontSize=10;fontColor=#312E81;" value="Manage secrets" vertex="1">
+          <mxGeometry height="35" width="130" x="210" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-config-wh" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#C7D2FE;strokeColor=#4F46E5;fontSize=10;fontColor=#312E81;" value="Configure webhook" vertex="1">
+          <mxGeometry height="35" width="140" x="210" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="sub-pipelines" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF7ED;strokeColor=#EA580C;strokeWidth=1;dashed=1;fontSize=12;fontStyle=1;fontColor=#C2410C;verticalAlign=top;spacingTop=2;arcSize=10;" value="Pipeline Execution" vertex="1">
+          <mxGeometry height="310" width="310" x="500" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-create-pipe" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FED7AA;strokeColor=#EA580C;fontSize=10;fontColor=#7C2D12;" value="Create pipeline (YAML)" vertex="1">
+          <mxGeometry height="35" width="160" x="530" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-trigger" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FED7AA;strokeColor=#EA580C;fontSize=10;fontColor=#7C2D12;" value="Trigger pipeline run" vertex="1">
+          <mxGeometry height="35" width="150" x="530" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-dag" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FED7AA;strokeColor=#EA580C;fontSize=10;fontColor=#7C2D12;" value="View DAG visualization" vertex="1">
+          <mxGeometry height="35" width="160" x="530" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-logs" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FED7AA;strokeColor=#EA580C;fontSize=10;fontColor=#7C2D12;" value="View real-time logs" vertex="1">
+          <mxGeometry height="35" width="150" x="530" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-approve" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FED7AA;strokeColor=#EA580C;fontSize=10;fontColor=#7C2D12;" value="Approve deployment" vertex="1">
+          <mxGeometry height="35" width="160" x="530" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="sub-deploy" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0FDF4;strokeColor=#16A34A;strokeWidth=1;dashed=1;fontSize=12;fontStyle=1;fontColor=#15803D;verticalAlign=top;spacingTop=2;arcSize=10;" value="Deployment &amp; Health" vertex="1">
+          <mxGeometry height="350" width="310" x="860" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-deploy-bg" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#BBF7D0;strokeColor=#16A34A;fontSize=10;fontColor=#14532D;" value="Deploy (Blue-Green)" vertex="1">
+          <mxGeometry height="35" width="150" x="900" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-deploy-can" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#BBF7D0;strokeColor=#16A34A;fontSize=10;fontColor=#14532D;" value="Deploy (Canary)" vertex="1">
+          <mxGeometry height="35" width="150" x="900" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-deploy-roll" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#BBF7D0;strokeColor=#16A34A;fontSize=10;fontColor=#14532D;" value="Deploy (Rolling)" vertex="1">
+          <mxGeometry height="35" width="150" x="900" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-rollback" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#BBF7D0;strokeColor=#16A34A;fontSize=10;fontColor=#14532D;" value="Rollback deployment" vertex="1">
+          <mxGeometry height="35" width="150" x="900" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-health" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#BBF7D0;strokeColor=#16A34A;fontSize=10;fontColor=#14532D;" value="Monitor health (auto)" vertex="1">
+          <mxGeometry height="35" width="150" x="900" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-self-heal" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#BBF7D0;strokeColor=#16A34A;fontSize=10;fontColor=#14532D;" value="Self-heal (restart/rollback)" vertex="1">
+          <mxGeometry height="35" width="170" x="890" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="sub-team" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF2F2;strokeColor=#DC2626;strokeWidth=1;dashed=1;fontSize=12;fontStyle=1;fontColor=#991B1B;verticalAlign=top;spacingTop=2;arcSize=10;" value="Team Management" vertex="1">
+          <mxGeometry height="200" width="260" x="180" y="570" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-invite" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FECACA;strokeColor=#DC2626;fontSize=10;fontColor=#991B1B;" value="Invite member" vertex="1">
+          <mxGeometry height="35" width="130" x="210" y="610" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-roles" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FECACA;strokeColor=#DC2626;fontSize=10;fontColor=#991B1B;" value="Assign roles (RBAC)" vertex="1">
+          <mxGeometry height="35" width="150" x="210" y="660" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-register-runner" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FECACA;strokeColor=#DC2626;fontSize=10;fontColor=#991B1B;" value="Register runner" vertex="1">
+          <mxGeometry height="35" width="130" x="210" y="710" as="geometry" />
+        </mxCell>
+        <mxCell id="sub-obs" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F3FF;strokeColor=#7C3AED;strokeWidth=1;dashed=1;fontSize=12;fontStyle=1;fontColor=#5B21B6;verticalAlign=top;spacingTop=2;arcSize=10;" value="Observability" vertex="1">
+          <mxGeometry height="250" width="300" x="500" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-metrics" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DDD6FE;strokeColor=#7C3AED;fontSize=10;fontColor=#4C1D95;" value="View pipeline metrics" vertex="1">
+          <mxGeometry height="35" width="150" x="530" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-alerts" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DDD6FE;strokeColor=#7C3AED;fontSize=10;fontColor=#4C1D95;" value="Set alert rules" vertex="1">
+          <mxGeometry height="35" width="140" x="530" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-audit" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DDD6FE;strokeColor=#7C3AED;fontSize=10;fontColor=#4C1D95;" value="View audit log" vertex="1">
+          <mxGeometry height="35" width="140" x="530" y="610" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-sla" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DDD6FE;strokeColor=#7C3AED;fontSize=10;fontColor=#4C1D95;" value="Track SLA uptime" vertex="1">
+          <mxGeometry height="35" width="140" x="530" y="660" as="geometry" />
+        </mxCell>
+        <mxCell id="sub-events" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#666666;strokeWidth=1;dashed=1;fontSize=12;fontStyle=1;fontColor=#333333;verticalAlign=top;spacingTop=2;arcSize=10;" value="Event Triggers" vertex="1">
+          <mxGeometry height="200" width="300" x="860" y="490" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-push-event" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#E5E7EB;strokeColor=#6B7280;fontSize=10;fontColor=#374151;" value="Receive push event" vertex="1">
+          <mxGeometry height="35" width="150" x="890" y="530" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-verify-sig" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#E5E7EB;strokeColor=#6B7280;fontSize=10;fontColor=#374151;" value="Verify HMAC signature" vertex="1">
+          <mxGeometry height="35" width="160" x="890" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-schedule" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#E5E7EB;strokeColor=#6B7280;fontSize=10;fontColor=#374151;" value="Scheduled trigger (cron)" vertex="1">
+          <mxGeometry height="35" width="160" x="890" y="630" as="geometry" />
+        </mxCell>
+        <mxCell id="sub-runner" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF7ED;strokeColor=#EA580C;strokeWidth=1;dashed=1;fontSize=12;fontStyle=1;fontColor=#C2410C;verticalAlign=top;spacingTop=2;arcSize=10;" value="Runner Operations" vertex="1">
+          <mxGeometry height="200" width="300" x="860" y="730" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-poll" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FED7AA;strokeColor=#EA580C;fontSize=10;fontColor=#7C2D12;" value="Poll for jobs (5s)" vertex="1">
+          <mxGeometry height="35" width="140" x="890" y="770" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-exec-pipe" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FED7AA;strokeColor=#EA580C;fontSize=10;fontColor=#7C2D12;" value="Execute pipeline (DAG)" vertex="1">
+          <mxGeometry height="35" width="160" x="890" y="820" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-clone" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FED7AA;strokeColor=#EA580C;fontSize=10;fontColor=#7C2D12;" value="Clone repository" vertex="1">
+          <mxGeometry height="35" width="140" x="890" y="870" as="geometry" />
+        </mxCell>
+        <mxCell id="l1" edge="1" parent="1" source="actor-dev" style="rounded=0;strokeColor=#2563EB;strokeWidth=1;" target="uc-signin">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l2" edge="1" parent="1" source="actor-dev" style="rounded=0;strokeColor=#2563EB;strokeWidth=1;" target="uc-create-proj">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l3" edge="1" parent="1" source="actor-dev" style="rounded=0;strokeColor=#2563EB;strokeWidth=1;" target="uc-import">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l4" edge="1" parent="1" source="actor-dev" style="rounded=0;strokeColor=#2563EB;strokeWidth=1;" target="uc-create-pipe">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l5" edge="1" parent="1" source="actor-dev" style="rounded=0;strokeColor=#2563EB;strokeWidth=1;" target="uc-trigger">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l6" edge="1" parent="1" source="actor-dev" style="rounded=0;strokeColor=#2563EB;strokeWidth=1;" target="uc-dag">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l7" edge="1" parent="1" source="actor-dev" style="rounded=0;strokeColor=#2563EB;strokeWidth=1;" target="uc-logs">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l8" edge="1" parent="1" source="actor-dev" style="rounded=0;strokeColor=#2563EB;strokeWidth=1;" target="uc-secrets">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l9" edge="1" parent="1" source="actor-dev" style="rounded=0;strokeColor=#2563EB;strokeWidth=1;" target="uc-approve">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="la1" edge="1" parent="1" source="actor-admin" style="rounded=0;strokeColor=#DC2626;strokeWidth=1;" target="uc-invite">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="la2" edge="1" parent="1" source="actor-admin" style="rounded=0;strokeColor=#DC2626;strokeWidth=1;" target="uc-roles">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="la3" edge="1" parent="1" source="actor-admin" style="rounded=0;strokeColor=#DC2626;strokeWidth=1;" target="uc-register-runner">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="la4" edge="1" parent="1" source="actor-admin" style="rounded=0;strokeColor=#DC2626;strokeWidth=1;" target="uc-alerts">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="la5" edge="1" parent="1" source="actor-admin" style="rounded=0;strokeColor=#DC2626;strokeWidth=1;" target="uc-config-wh">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="la6" edge="1" parent="1" source="actor-admin" style="rounded=0;strokeColor=#DC2626;strokeWidth=1;" target="uc-rollback">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lv1" edge="1" parent="1" source="actor-viewer" style="rounded=0;strokeColor=#6B7280;strokeWidth=1;" target="uc-dag">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lv2" edge="1" parent="1" source="actor-viewer" style="rounded=0;strokeColor=#6B7280;strokeWidth=1;" target="uc-logs">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lv3" edge="1" parent="1" source="actor-viewer" style="rounded=0;strokeColor=#6B7280;strokeWidth=1;" target="uc-metrics">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lv4" edge="1" parent="1" source="actor-viewer" style="rounded=0;strokeColor=#6B7280;strokeWidth=1;" target="uc-audit">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lv5" edge="1" parent="1" source="actor-viewer" style="rounded=0;strokeColor=#6B7280;strokeWidth=1;" target="uc-sla">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lg1" edge="1" parent="1" source="actor-github" style="rounded=0;strokeColor=#666666;strokeWidth=1;" target="uc-push-event">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lg2" edge="1" parent="1" source="actor-github" style="rounded=0;strokeColor=#666666;strokeWidth=1;" target="uc-verify-sig">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lg3" edge="1" parent="1" source="actor-github" style="rounded=0;strokeColor=#666666;strokeWidth=1;" target="uc-signin">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lr1" edge="1" parent="1" source="actor-runner" style="rounded=0;strokeColor=#EA580C;strokeWidth=1;" target="uc-poll">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lr2" edge="1" parent="1" source="actor-runner" style="rounded=0;strokeColor=#EA580C;strokeWidth=1;" target="uc-exec-pipe">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lr3" edge="1" parent="1" source="actor-runner" style="rounded=0;strokeColor=#EA580C;strokeWidth=1;" target="uc-clone">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lr4" edge="1" parent="1" source="actor-runner" style="rounded=0;strokeColor=#EA580C;strokeWidth=1;" target="uc-deploy-bg">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lr5" edge="1" parent="1" source="actor-runner" style="rounded=0;strokeColor=#EA580C;strokeWidth=1;" target="uc-health">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lr6" edge="1" parent="1" source="actor-runner" style="rounded=0;strokeColor=#EA580C;strokeWidth=1;" target="uc-self-heal">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ld1" edge="1" parent="1" source="actor-docker" style="rounded=0;strokeColor=#16A34A;strokeWidth=1;" target="uc-deploy-bg">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ld2" edge="1" parent="1" source="actor-docker" style="rounded=0;strokeColor=#16A34A;strokeWidth=1;" target="uc-deploy-can">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ld3" edge="1" parent="1" source="actor-docker" style="rounded=0;strokeColor=#16A34A;strokeWidth=1;" target="uc-deploy-roll">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ld4" edge="1" parent="1" source="actor-docker" style="rounded=0;strokeColor=#16A34A;strokeWidth=1;" target="uc-self-heal">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="inc1" edge="1" parent="1" source="uc-push-event" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#999999;strokeWidth=1;dashed=1;fontSize=8;fontColor=#666666;" target="uc-trigger" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;">
+          <mxGeometry relative="1" x="0.0947" as="geometry">
+            <mxPoint y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="inc2" edge="1" parent="1" source="uc-trigger" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#999999;strokeWidth=1;dashed=1;fontSize=8;fontColor=#666666;" target="uc-exec-pipe" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="inc3" edge="1" parent="1" source="uc-exec-pipe" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#999999;strokeWidth=1;dashed=1;fontSize=8;fontColor=#666666;" target="uc-clone" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ext1" edge="1" parent="1" source="uc-self-heal" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#999999;strokeWidth=1;dashed=1;fontSize=8;fontColor=#666666;" target="uc-rollback" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
