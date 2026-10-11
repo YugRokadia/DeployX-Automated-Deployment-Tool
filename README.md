@@ -1,18 +1,75 @@
-# DeployX
+<div align="center">
 
-Cloud-native CI/CD platform with YAML-defined pipelines, DAG task execution, multi-strategy deployments, self-healing, and real-time observability.
+<img src="assets/banner.svg" alt="DeployX - Cloud-native CI/CD platform" width="100%"/>
 
-## Tech Stack
+<br/>
+
+[![Live Demo](https://img.shields.io/badge/Live_Demo-deployx--chi.vercel.app-22d3ee?style=for-the-badge&logo=vercel&logoColor=white)](https://deployx-chi.vercel.app)
+[![License: MIT](https://img.shields.io/badge/License-MIT-a78bfa?style=for-the-badge)](#-license)
+
+![Next.js](https://img.shields.io/badge/Next.js_16-000000?style=flat-square&logo=nextdotjs&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=flat-square&logo=supabase&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js_20+-339933?style=flat-square&logo=nodedotjs&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white)
+![Nginx](https://img.shields.io/badge/Nginx-009639?style=flat-square&logo=nginx&logoColor=white)
+![Turborepo](https://img.shields.io/badge/Turborepo-EF4444?style=flat-square&logo=turborepo&logoColor=white)
+![pnpm](https://img.shields.io/badge/pnpm_9+-F69220?style=flat-square&logo=pnpm&logoColor=white)
+
+**Define pipelines in YAML. Run them as DAGs. Ship with blue-green, canary or rolling deploys. Let the platform heal itself.**
+
+[Features](#-features) · [How it works](#-how-it-works) · [Architecture](#-architecture) · [Quick start](#-quick-start) · [Docs](#-documentation)
+
+</div>
+
+<img src="assets/divider.svg" width="100%" alt=""/>
+
+## ✨ Features
+
+| | | |
+|:--|:--|:--|
+| 🧩 **YAML Pipelines**<br/>Define build, test and deploy tasks with DAG dependencies | 🚦 **Multi-Strategy Deployments**<br/>Blue-green, canary (staged traffic) and rolling updates | 🩺 **Self-Healing**<br/>Automatic health monitoring, restart cascades and rollback |
+| 📡 **Real-Time Observability**<br/>Live logs, DAG visualization, SLA tracking and build prediction | 🔗 **GitHub Webhooks**<br/>Auto-trigger pipelines on push with branch filtering | ⏰ **Scheduled Triggers**<br/>Cron-based pipeline execution with timezone support |
+| 🔐 **Secrets Management**<br/>AES-256-GCM encrypted project secrets | 👥 **Team Management**<br/>RBAC with Owner, Admin, Developer and Viewer roles | 🎯 **Multi-Target**<br/>Deploy to Docker Local, Railway or Fly.io |
+
+<img src="assets/divider.svg" width="100%" alt=""/>
+
+## ⚙️ How it works
+
+Pipelines are parsed from YAML, resolved into a dependency graph, and executed by a state machine. Tasks that do not depend on each other run in parallel, and each stage advances as soon as its dependencies finish.
+
+<div align="center">
+<img src="assets/pipeline.svg" alt="Animated pipeline DAG execution" width="100%"/>
+</div>
+
+### 🚀 Deployment strategies
+
+Choose how a new release reaches users. Health checks gate the rollout, and self-healing can restart or roll back automatically.
+
+<div align="center">
+<img src="assets/strategies.svg" alt="Animated blue-green, canary and rolling deployment strategies" width="100%"/>
+</div>
+
+<img src="assets/divider.svg" width="100%" alt=""/>
+
+## 🏗️ Architecture
+
+The control plane (Next.js) lives on Vercel, state and auth live in Supabase, and a Node.js runner agent executes pipelines: it clones, builds and deploys. The runner connects to whatever URL is provided during registration, so it works for both local and production setups.
+
+<div align="center">
+<img src="assets/architecture.svg" alt="DeployX architecture diagram" width="100%"/>
+</div>
+
+### 🧰 Tech stack
 
 | Layer | Technology |
-|-------|-----------|
-| Dashboard | Next.js 16 (App Router) |
-| Database & Auth | Supabase (Postgres, Auth, Realtime, Storage) |
-| Pipeline Runner | Node.js CLI agent |
-| Deployments | Docker, Nginx reverse proxy |
-| Monorepo | Turborepo + pnpm workspaces |
+|:--|:--|
+| 🖥️ Dashboard | Next.js 16 (App Router) |
+| 🗄️ Database & Auth | Supabase (Postgres, Auth, Realtime, Storage) |
+| 🏃 Pipeline Runner | Node.js CLI agent |
+| 🐳 Deployments | Docker, Nginx reverse proxy |
+| 📦 Monorepo | Turborepo + pnpm workspaces |
 
-## Architecture
+### 📁 Project structure
 
 ```
 deployx/
@@ -29,16 +86,11 @@ deployx/
 └── docs/context/               # Architecture documentation (18+ docs)
 ```
 
-## Quick Start
+<img src="assets/divider.svg" width="100%" alt=""/>
 
-### Prerequisites
+## 🚀 Quick start
 
-- Node.js 20+
-- pnpm 9+
-- Docker Desktop
-- Supabase CLI (`npx supabase`)
-
-### Setup
+**Prerequisites:** Node.js 20+ · pnpm 9+ · Docker Desktop · Supabase CLI (`npx supabase`)
 
 ```bash
 # 1. Clone and install
@@ -60,42 +112,48 @@ npx supabase db push
 pnpm dev
 ```
 
-The dashboard runs at `http://localhost:3000` during local development. The hosted version is live at [`https://deployx-chi.vercel.app`](https://deployx-chi.vercel.app).
+The dashboard runs at `http://localhost:3000` during local development. The hosted version is live at **[deployx-chi.vercel.app](https://deployx-chi.vercel.app)**.
 
-### Environment Variables
+<details>
+<summary><b>🔑 Environment variables</b></summary>
+
+<br/>
 
 | Variable | Description |
-|----------|-------------|
+|:--|:--|
 | `NEXT_PUBLIC_SUPABASE_URL` | Supabase project URL |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase anonymous key |
 | `SUPABASE_SERVICE_ROLE_KEY` | Supabase service role key (server-only) |
 | `DEPLOYX_SECRET_KEY` | Secret key for AES-256-GCM encryption (secrets, GitHub tokens, webhooks) |
 
-## Deployment
+</details>
 
-The control plane (Next.js web app) is deployed to **Vercel** at [`https://deployx-chi.vercel.app`](https://deployx-chi.vercel.app).
+<details>
+<summary><b>☁️ Deploying the control plane (Vercel + Supabase)</b></summary>
 
-### Vercel Environment Variables
+<br/>
 
-Set these in the Vercel Dashboard under Project Settings > Environment Variables:
+The control plane (Next.js web app) is deployed to **Vercel** at [deployx-chi.vercel.app](https://deployx-chi.vercel.app).
+
+**Vercel environment variables.** Set these in the Vercel Dashboard under *Project Settings > Environment Variables*:
 
 | Variable | Description |
-|----------|-------------|
+|:--|:--|
 | `NEXT_PUBLIC_SUPABASE_URL` | Supabase project URL |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase anonymous key |
 | `SUPABASE_SERVICE_ROLE_KEY` | Supabase service role key |
 | `DEPLOYX_SECRET_KEY` | Encryption key for secrets, GitHub tokens, and webhook signatures |
 
-### Supabase Auth Configuration
+**Supabase Auth configuration.** For production, add the following under *Authentication > URL Configuration*:
 
-For production, add the following to your Supabase project's Auth settings (Authentication > URL Configuration):
-
-- **Site URL**: `https://deployx-chi.vercel.app`
-- **Redirect URLs**: `https://deployx-chi.vercel.app/auth/callback`
+- **Site URL:** `https://deployx-chi.vercel.app`
+- **Redirect URLs:** `https://deployx-chi.vercel.app/auth/callback`
 
 > The runner agent connects to whatever URL is provided during registration. The Register Runner dialog uses `window.location.origin`, so it automatically generates the correct `--url` flag for both local and production environments.
 
-## Demo
+</details>
+
+### 🧪 Demo
 
 A working demo app is included at `examples/demo-app/`. It demonstrates all DeployX contracts:
 
@@ -107,24 +165,19 @@ npm start                 # Start locally on port 3000
 
 See [examples/demo-app/README.md](examples/demo-app/README.md) for step-by-step usage with DeployX.
 
-## Features
+<img src="assets/divider.svg" width="100%" alt=""/>
 
-- **YAML Pipelines** — Define build/test/deploy tasks with DAG dependencies
-- **Multi-Strategy Deployments** — Blue-green, canary (staged traffic), rolling updates
-- **Self-Healing** — Automatic health monitoring, restart cascades, and rollback
-- **Real-Time Observability** — Live logs, DAG visualization, SLA tracking, build prediction
-- **GitHub Webhooks** — Auto-trigger pipelines on push with branch filtering
-- **Scheduled Triggers** — Cron-based pipeline execution with timezone support
-- **Secrets Management** — AES-256-GCM encrypted project secrets
-- **Team Management** — RBAC with Owner/Admin/Developer/Viewer roles
-- **Multi-Target** — Deploy to Docker Local, Railway, or Fly.io
+## 📚 Documentation
 
-## Documentation
+All architecture docs live in [`docs/context/`](docs/context/).
 
-All architecture docs are in [`docs/context/`](docs/context/):
+<details open>
+<summary><b>Browse all 20 docs</b></summary>
+
+<br/>
 
 | Doc | Topic |
-|-----|-------|
+|:--|:--|
 | [01-project-overview](docs/context/01-project-overview.md) | Architecture & tech stack |
 | [02-auth-setup](docs/context/02-auth-setup.md) | OAuth, protected routes |
 | [03-pages-and-routes](docs/context/03-pages-and-routes.md) | Complete route map |
@@ -146,6 +199,16 @@ All architecture docs are in [`docs/context/`](docs/context/):
 | [19-getting-started](docs/context/19-getting-started.md) | Step-by-step user guide |
 | [20-ui-security-fixes](docs/context/20-ui-security-fixes.md) | Recent UI & security patches |
 
-## License
+</details>
 
-MIT
+## 📄 License
+
+Released under the **MIT** License.
+
+<div align="center">
+
+<br/>
+
+Built by [Yug Rokadia](https://github.com/YugRokadia) · If DeployX is useful to you, consider leaving a ⭐
+
+</div>
